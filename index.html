@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Café Julieta - Café de barrio en San Isidro y Barranco. Café de especialidad, desayunos, sánguches artesanales, pizzas, pastelería y más. Pet Friendly 🐶">
+    <meta name="keywords" content="cafetería, san isidro, barranco, café de especialidad, brunch, julieta, pet friendly, sándwiches, pizzas, desayunos">
+    <meta name="author" content="Café Julieta">
+    <title>Café Julieta | Café de Barrio en San Isidro y Barranco | Pet Friendly 🐶</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #6F4E37;
+            --primary-dark: #5A3A2A;
+            --primary-light: #D4B8A8;
+            --secondary-color: #2C1810;
+            --text-color: #3E2723;
+            --text-light: #795548;
+            --bg-light: #FFF9F5;
+            --bg-cream: #FDF8F2;
+            --bg-warm: #FBF5EB;
+            --bg-dark: #2C1810;
+            --white: #FFFFFF;
+            --shadow-sm: 0 2px 10px rgba(0,0,0,0.05);
+            --shadow-md: 0 5px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+        .preloader.hide { opacity: 0; pointer-events: none; }
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--primary-light);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-md);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .logo a {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--white);
+        }
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+        .logo-accent { color: var(--primary-color); }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after { width: 100%; }
+        .nav-link:hover,
+        .nav-link.active { color: var(--primary-color); }
+
+        .hamburger { display: none; cursor: pointer; }
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=1600');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: var(--white);
+            max-width: 800px;
+            padding: 2rem;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(111, 78, 55, 0.9);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        .hero-title .highlight { color: #D4B8A8; }
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+        }
+        .stat { text-align: center; }
+        .stat-number {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #D4B8A8;
+        }
+        .stat-label { font-size: 0.85rem; opacity: 0.9; }
+
+        section { padding: 5rem 0; }
+        .section-header { margin-bottom: 3rem; }
+        .section-header.text-center { text-align: center; }
+        .section-tag {
+            display: inline-block;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        .section-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+            margin-top: 1rem;
+        }
+        .section-divider.center { margin: 1rem auto 0; }
+
+        .esencia { background: var(--bg-cream); }
+        .esencia-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .esencia-text { margin-bottom: 1.5rem; line-height: 1.8; }
+        .esencia-features {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .feature i { color: var(--primary-color); font-size: 1.2rem; }
+        .esencia-image {
+            background: url('https://images.pexels.com/photos/3020919/pexels-photo-3020919.jpeg?auto=compress&cs=tinysrgb&w=600') center/cover;
+            border-radius: 1rem;
+            min-height: 400px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ========== MENÚ CON SELECTOR ========== */
+        .menu { background: var(--bg-warm); }
+        
+        .sede-selector {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .sede-btn {
+            padding: 0.8rem 2rem;
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            border-radius: 50px;
+            color: var(--primary-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        .sede-btn.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+        .sede-btn i {
+            margin-right: 0.5rem;
+        }
+        
+        .menu-container {
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+        .menu-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        .menu-container::-webkit-scrollbar-track {
+            background: var(--bg-cream);
+            border-radius: 10px;
+        }
+        .menu-container::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 10px;
+        }
+        
+        .categoria-titulo {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin: 1.5rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-light);
+            font-family: 'Playfair Display', serif;
+        }
+        .categoria-titulo:first-of-type {
+            margin-top: 0;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .menu-item {
+            background: var(--white);
+            border-radius: 0.8rem;
+            padding: 0.8rem 1rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #f0e4d8;
+        }
+        .menu-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-light);
+        }
+        .menu-info {
+            flex: 1;
+        }
+        .menu-info h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            color: var(--secondary-color);
+            font-family: 'Poppins', sans-serif;
+        }
+        .menu-info p {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            line-height: 1.3;
+        }
+        .menu-price {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+            margin-left: 1rem;
+            white-space: nowrap;
+        }
+        .menu-note {
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg-cream);
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .chef { background: var(--bg-cream); }
+        .chef-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .chef-image {
+            background: url('https://images.pexels.com/photos/3409966/pexels-photo-3409966.jpeg?auto=compress&cs=tinysrgb&w=600') center/cover;
+            border-radius: 1rem;
+            min-height: 500px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .chef-experience {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+        }
+        .chef-bio { margin-bottom: 1.5rem; line-height: 1.8; }
+        .chef-quote {
+            background: var(--bg-warm);
+            padding: 1.5rem;
+            border-left: 3px solid var(--primary-color);
+            margin: 1.5rem 0;
+        }
+        .chef-quote i { color: var(--primary-color); margin-right: 1rem; }
+
+        .ubicacion { background: var(--bg-light); }
+        
+        .pet-friendly-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+        .pet-friendly-banner {
+            background: linear-gradient(135deg, #6F4E37 0%, #8B6348 100%);
+            border-radius: 60px;
+            padding: 1rem 2.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+        .pet-friendly-banner:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        .pet-icon {
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+        .pet-text {
+            text-align: left;
+        }
+        .pet-text h4 {
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        .pet-text p {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+        
+        .sedes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .sede-card {
+            background: var(--white);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+        .sede-card:hover {
+            transform: translateY(-5px);
+        }
+        .sede-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--white);
+            padding: 1.2rem;
+            text-align: center;
+        }
+        .sede-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+        .sede-header p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        .sede-body {
+            padding: 1.5rem;
+        }
+        .sede-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .sede-info i {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            min-width: 30px;
+            margin-top: 0.2rem;
+        }
+        .sede-info .info-content {
+            flex: 1;
+        }
+        .sede-info .info-content strong {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.2rem;
+        }
+        .sede-info .info-content p {
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+        .pet-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #E8DCD0;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-top: 0.5rem;
+        }
+        .sede-map {
+            margin-top: 1rem;
+            border-radius: 1rem;
+            overflow: hidden;
+            height: 180px;
+        }
+        .sede-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .btn-maps {
+            display: block;
+            text-align: center;
+            background: var(--bg-cream);
+            color: var(--primary-color);
+            padding: 0.6rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            transition: var(--transition);
+        }
+        .btn-maps:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .reservas {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--white);
+            text-align: center;
+        }
+        .reservas-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .reservas-text h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .reservas-text p { opacity: 0.9; }
+
+        .footer {
+            background: var(--bg-dark);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer-about p { margin: 1rem 0; color: #D4B8A8; }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        .social-links a {
+            color: var(--white);
+            background: rgba(255,255,255,0.1);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        .footer-links ul, .footer-hours ul { list-style: none; }
+        .footer-links li, .footer-hours li { margin-bottom: 0.8rem; }
+        .footer-links a {
+            color: #D4B8A8;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer-links a:hover { color: var(--primary-color); }
+        .footer-hours span { font-weight: 600; color: var(--white); }
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+        }
+        .newsletter-form input::placeholder { color: #D4B8A8; }
+        .newsletter-form button {
+            background: var(--primary-color);
+            border: none;
+            padding: 0 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .newsletter-form button:hover { background: var(--primary-dark); }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #D4B8A8;
+            font-size: 0.85rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+        }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        @media (max-width: 968px) {
+            .hamburger { display: block; }
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--white);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow-md);
+                padding: 2rem 0;
+            }
+            .nav-menu.active { left: 0; }
+            .hero-title { font-size: 2.5rem; }
+            .esencia-grid, .chef-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .sedes-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .reservas-content { flex-direction: column; text-align: center; }
+            .pet-friendly-banner {
+                padding: 0.8rem 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                text-align: center;
+            }
+            .pet-text {
+                text-align: center;
+            }
+            .sede-selector {
+                gap: 1rem;
+            }
+            .sede-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .container { padding: 0 1rem; }
+            section { padding: 3rem 0; }
+            .section-title { font-size: 2rem; }
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="preloader" id="preloader"><div class="loader"></div></div>
+
+<header class="header" id="header">
+    <div class="header-container">
+        <div class="logo">
+            <a href="#inicio">
+                <div class="logo-img">☕</div>
+                <div class="logo-text">JULIETA <span class="logo-accent">CAFÉ DE BARRIO</span></div>
+            </a>
+        </div>
+        <nav class="navbar">
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#inicio" class="nav-link active">Inicio</a></li>
+                <li class="nav-item"><a href="#esencia" class="nav-link">El Café</a></li>
+                <li class="nav-item"><a href="#menu" class="nav-link">Menú</a></li>
+                <li class="nav-item"><a href="#chef" class="nav-link">Nuestro Barista</a></li>
+                <li class="nav-item"><a href="#ubicacion" class="nav-link">Ubicación</a></li>
+            </ul>
+            <div class="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section id="inicio" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">San Isidro · Barranco</div>
+            <h1 class="hero-title">JULIETA <span class="highlight">CAFÉ DE BARRIO</span></h1>
+            <p class="hero-subtitle">Café de especialidad · Desayunos · Sánguches · Pizzas artesanales · Pastelería · 🐶 Pet Friendly</p>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn btn-primary">Ver Menú <i class="fas fa-arrow-right"></i></a>
+                <a href="#ubicacion" class="btn btn-secondary">Nuestras Sedes <i class="fas fa-map-marker-alt"></i></a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat"><span class="stat-number">100%</span><span class="stat-label">Café de especialidad</span></div>
+                <div class="stat"><span class="stat-number">Casero</span><span class="stat-label">Pan y pastelería</span></div>
+                <div class="stat"><span class="stat-number">🐶</span><span class="stat-label">Pet Friendly</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="esencia" class="esencia">
+        <div class="container">
+            <div class="esencia-grid">
+                <div class="esencia-content">
+                    <div class="section-header">
+                        <span class="section-tag">Nuestra esencia</span>
+                        <h2 class="section-title">Un café con alma de barrio</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <p class="esencia-text">En Café Julieta creemos que una buena taza de café puede cambiar tu día. Somos un espacio acogedor en San Isidro y Barranco donde la tradición del café de especialidad se encuentra con la calidez de un barrio.</p>
+                    <p class="esencia-text">Nuestros granos son seleccionados cuidadosamente de fincas sostenibles, tostados artesanalmente para resaltar sus notas únicas. Acompañamos cada preparación con repostería casera hecha con amor.</p>
+                    <div class="esencia-features">
+                        <div class="feature"><i class="fas fa-seedling"></i><span>Granos de origen</span></div>
+                        <div class="feature"><i class="fas fa-mug-hot"></i><span>Tostado artesanal</span></div>
+                        <div class="feature"><i class="fas fa-heart"></i><span>Pasión por el detalle</span></div>
+                        <div class="feature"><i class="fas fa-dog"></i><span>Pet Friendly</span></div>
+                    </div>
+                </div>
+                <div class="esencia-image"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="menu">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Sabores únicos</span>
+                <h2 class="section-title">Nuestro Menú</h2>
+                <div class="section-divider center"></div>
+                <p class="section-subtitle">Descubre nuestra carta por sede</p>
+            </div>
+            
+            <div class="sede-selector">
+                <button class="sede-btn active" data-sede="Barranco"><i class="fas fa-umbrella-beach"></i> Barranco</button>
+                <button class="sede-btn" data-sede="San Isidro"><i class="fas fa-building"></i> San Isidro</button>
+            </div>
+            
+            <div id="menuContainer" class="menu-container"></div>
+            
+            <div class="menu-note">
+                <i class="fas fa-info-circle"></i> Los precios incluyen IGV · Promociones válidas solo en la sede correspondiente
+            </div>
+        </div>
+    </section>
+
+    <section id="chef" class="chef">
+        <div class="container">
+            <div class="chef-wrapper">
+                <div class="chef-image">
+                    <div class="chef-experience"><span class="exp-number">10+</span><span class="exp-text">Años tostando</span></div>
+                </div>
+                <div class="chef-info">
+                    <div class="section-header"><span class="section-tag">Nuestro Maestro</span><h2 class="section-title">Carlos & el equipo</h2><div class="section-divider"></div></div>
+                    <p class="chef-bio">Detrás de cada taza hay un equipo apasionado por el café. Carlos, nuestro barista principal, ha recorrido fincas cafetaleras de Cajamarca y Junín para seleccionar los mejores granos.</p>
+                    <p class="chef-bio">En Café Julieta, cada preparación es un homenaje a la cultura cafetera peruana. Desde el espresso hasta nuestros cold brews, cuidamos cada detalle para que vivas una experiencia única.</p>
+                    <div class="chef-quote"><i class="fas fa-quote-left"></i><p>Un buen café no solo se toma, se siente. Es el resultado del trabajo de muchas manos que aman lo que hacen.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ubicacion" class="ubicacion">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Visítanos</span>
+                <h2 class="section-title">Nuestras Sedes</h2>
+                <div class="section-divider center"></div>
+                <p class="section-subtitle">Dos ubicaciones para disfrutar de la experiencia Julieta</p>
+            </div>
+            
+            <div class="pet-friendly-wrapper">
+                <div class="pet-friendly-banner">
+                    <div class="pet-icon"><i class="fas fa-paw"></i></div>
+                    <div class="pet-text">
+                        <h4>🐶 Pet Friendly</h4>
+                        <p>¡Tu mascota es bienvenida! Contamos con espacios adaptados</p>
+                    </div>
+                    <i class="fas fa-heart" style="opacity: 0.7;"></i>
+                </div>
+            </div>
+            
+            <div class="sedes-grid">
+                <div class="sede-card">
+                    <div class="sede-header">
+                        <h3>📍 San Isidro</h3>
+                        <p>Los Libertadores 260</p>
+                    </div>
+                    <div class="sede-body">
+                        <div class="sede-info"><i class="fas fa-clock"></i><div class="info-content"><strong>Horario</strong><p>Lunes a Domingo · 8:00 am - 9:30 pm</p></div></div>
+                        <div class="sede-info"><i class="fas fa-phone-alt"></i><div class="info-content"><strong>Contacto</strong><p>+51 966 525 926</p></div></div>
+                        <div class="sede-info"><i class="fas fa-dog"></i><div class="info-content"><strong>Mascotas</strong><p>🐶 Espacio Pet Friendly</p><span class="pet-badge"><i class="fas fa-paw"></i> Bienvenidos</span></div></div>
+                        <div class="sede-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.5000!2d-77.0312!3d-12.0995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c7e0b2e5b5b5%3A0x7e2e0c0e0e0e0e0!2sLos%20Libertadores%20260%2C%20San%20Isidro!5e0!3m2!1sen!2spe!4v1713040000000!5m2!1sen!2spe" allowfullscreen="" loading="lazy"></iframe></div>
+                        <a href="https://maps.google.com/?q=Los+Libertadores+260+San+Isidro" target="_blank" class="btn-maps"><i class="fas fa-directions"></i> Cómo llegar</a>
+                    </div>
+                </div>
+                
+                <div class="sede-card">
+                    <div class="sede-header">
+                        <h3>📍 Barranco</h3>
+                        <p>Av. Miguel Grau 799</p>
+                    </div>
+                    <div class="sede-body">
+                        <div class="sede-info"><i class="fas fa-clock"></i><div class="info-content"><strong>Horario</strong><p>Lunes a Domingo · 8:00 am - 9:00 pm</p></div></div>
+                        <div class="sede-info"><i class="fas fa-phone-alt"></i><div class="info-content"><strong>Contacto</strong><p>+51 966 525 926</p></div></div>
+                        <div class="sede-info"><i class="fas fa-dog"></i><div class="info-content"><strong>Mascotas</strong><p>🐶 Espacio Pet Friendly</p><span class="pet-badge"><i class="fas fa-paw"></i> Bienvenidos</span></div></div>
+                        <div class="sede-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.853353574924!2d-77.024059!3d-12.146737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b71c2e7d0e0f%3A0x7e2e0c0e0e0e0e0!2sAv.%20Almte.%20Miguel%20Grau%20799%2C%20Barranco%2015063!5e0!3m2!1sen!2spe!4v1713040000000!5m2!1sen!2spe" allowfullscreen="" loading="lazy"></iframe></div>
+                        <a href="https://maps.google.com/?q=Av+Miguel+Grau+799+Barranco" target="_blank" class="btn-maps"><i class="fas fa-directions"></i> Cómo llegar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reservas">
+        <div class="container">
+            <div class="reservas-content">
+                <div class="reservas-text">
+                    <h2>¿Quieres una experiencia especial?</h2>
+                    <p>🐶 Tu mascota también es bienvenida · Escríbenos para reservas o eventos privados</p>
+                </div>
+                <a href="https://wa.me/51966525926" class="btn btn-primary btn-large"><i class="fab fa-whatsapp"></i> Contáctanos por WhatsApp</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <div class="footer-logo"><span class="logo-icon">☕</span><span class="logo-text">JULIETA CAFÉ</span></div>
+                <p>Café de barrio en San Isidro y Barranco, donde cada taza cuenta una historia. 🐶 Pet Friendly</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/cafe.julieta/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/51966525926"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Explora</h4>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#esencia">El Café</a></li>
+                    <li><a href="#menu">Menú</a></li>
+                    <li><a href="#ubicacion">Ubicación</a></li>
+                </ul>
+            </div>
+            <div class="footer-hours">
+                <h4>Horarios</h4>
+                <ul>
+                    <li><span>San Isidro:</span> 8am - 9:30pm</li>
+                    <li><span>Barranco:</span> 8am - 9pm</li>
+                    <li><span>Todos los días:</span> Abierto</li>
+                </ul>
+            </div>
+            <div class="footer-newsletter">
+                <h4>Newsletter</h4>
+                <p>Novedades y promociones</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Tu correo">
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Café Julieta - Café de Barrio en San Isidro y Barranco | 🐶 Pet Friendly | Todos los derechos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+    // DATOS COMPLETOS DEL MENÚ (basado en los PDF)
+    const menuData = {
+        "Barranco": {
+            "Desayunos": [
+                { nombre: "Desayuno Continental", descripcion: "Jugo (papaya/piña/naranja) + café (espresso/americano) + tostada con mantequilla, mermelada y dulce de leche", precio: 20 },
+                { nombre: "Americano", descripcion: "Jugo + café + huevos a elección (fritos/revueltos/duros) + pan tostado", precio: 23 },
+                { nombre: "Francés", descripcion: "Jugo + café americano + Croissant", precio: 20 },
+                { nombre: "Omellet Vegetariano", descripcion: "Jugo + café + champignones, espinaca, cebolla blanca + pan tostado", precio: 23 },
+                { nombre: "Omellet Julieta", descripcion: "Jugo + café + tocino, tomate, mozarella + pan tostado", precio: 23 },
+                { nombre: "Saludable / Apaltado", descripcion: "Jugo + café + huevos a elección + palta + pan", precio: 23 },
+                { nombre: "Mediterráneo", descripcion: "Jugo + café + pan tostado + queso crema + trucha y palta", precio: 27 },
+                { nombre: "Ciclista", descripcion: "Sánguche de pollo + parfait de yogurt con frutos rojos + café", precio: 30 },
+                { nombre: "Croissant", descripcion: "Croissant clásico", precio: 10 },
+                { nombre: "Croissant Julieta", descripcion: "Pesto / mozarella / jamón crocante", precio: 16 },
+                { nombre: "Croissant Mixto", descripcion: "Jamón crocante / edam / mozarella", precio: 14 },
+                { nombre: "Croissant Huevo & Tocino", descripcion: "Huevo / tocino / mayonesa", precio: 14 },
+                { nombre: "Flauta de Frankfurt", descripcion: "", precio: 12 }
+            ],
+            "Sánguches": [
+                { nombre: "Sánguche de Pejerrey", descripcion: "Pejerrey tempura / salsa criolla", precio: 16 },
+                { nombre: "Hamburguesa Julieta", descripcion: "Pan brioche / 150gr hamburguesa / mermelada de cebolla / mozarella / edam / tocino crocante", precio: 27 },
+                { nombre: "Sánguche 260", descripcion: "Pan / queso crema / salame / cebolla caramelizada flambeada", precio: 18 },
+                { nombre: "Bocata de Jamón Serrano", descripcion: "Pan ciabatta / tomate refregado / aceite de oliva / queso / jamón serrano", precio: 21 },
+                { nombre: "Chicken Crunch", descripcion: "Pan brioche / pollo crocante / ensalada de col y zanahoria dulce / guacamole / arúgula", precio: 29 },
+                { nombre: "Sánguche de Asado", descripcion: "Sánguche tradicional con salsa de tomate", precio: 22 },
+                { nombre: "Sánguche de Pollo", descripcion: "Brioche bun / pollo con mayonesa", precio: 15 },
+                { nombre: "Sánguche Tres Jamones", descripcion: "Jamón crocante / jamón inglés / salame / lechuga / salsa de la casa", precio: 18 }
+            ],
+            "Piqueos / Tapas": [
+                { nombre: "Tequeños de Queso", descripcion: "Con salsa huancaina o guacamole", precio: 19 },
+                { nombre: "Tortilla Española", descripcion: "Nuestra versión con salchicha de Huacho", precio: 19 },
+                { nombre: "Salchi Power", descripcion: "Parrillera / finas hierbas / frankfurter / choribraza / papas fritas / huevo montado", precio: 24 },
+                { nombre: "Salchipapa", descripcion: "Salchicha frankfurter / papas fritas / huevo montado", precio: 20 },
+                { nombre: "Tapa de Jamón Serrano", descripcion: "Tomate / aceite de oliva / reducción de balsámico", precio: 24 },
+                { nombre: "Tapa Trucha y Queso", descripcion: "Sour cream / palta / trucha ahumada", precio: 24 },
+                { nombre: "Tapa Huevo y Palta", descripcion: "Guacamole / huevo frito / ajonjolí / aceite de oliva", precio: 16 },
+                { nombre: "Empanada de Carne", descripcion: "", precio: 10 },
+                { nombre: "Wrap Chiken Tenders", descripcion: "Guacamole / lechuga / queso cheddar / chicken tenders / salsa de la casa", precio: 21 }
+            ],
+            "Entradas / Ensaladas": [
+                { nombre: "Poke 260", descripcion: "Pollo crocante / arroz base / col morada / choclo / palta / zanahoria / espinaca / piña", precio: 29 },
+                { nombre: "Poke Trucha Acebichada", descripcion: "Arroz base / lechuga / maíz chulpi / camote en chips / cebolla blanca / choclo / trucha ahumada", precio: 29 },
+                { nombre: "Julieta", descripcion: "Mix de lechugas / arúgula / trozos de pollo crocante / pico de gallo / chips de maíz", precio: 26 },
+                { nombre: "La de Siempre", descripcion: "Lechuga de seda / tomate / choclo / huevo / palta / atún con mayonesa de la casa / hojas de culantro", precio: 26 },
+                { nombre: "Favorita", descripcion: "Mix de lechugas / peras en almíbar / trozos de queso azul / praliné de pecanas / tocino crocante", precio: 28 },
+                { nombre: "Caprese", descripcion: "Mozarella / tomate / albahaca", precio: 26 },
+                { nombre: "Crema de Zapallo", descripcion: "Con tostada de pan masa madre", precio: 18 }
+            ],
+            "Fondos": [
+                { nombre: "Pesto con Pollo al Panko", descripcion: "Spaghetti al pesto / pollo crocante / reducción de vino tinto", precio: 32 },
+                { nombre: "Lomo Saltado", descripcion: "Papas fritas / arroz blanco", precio: 35 },
+                { nombre: "Spaguetti a la Carbonara", descripcion: "", precio: 32 },
+                { nombre: "Enrrollado de Pollo", descripcion: "Con tocino y espinaca / puré de papas flambeado / arroz blanco", precio: 35 },
+                { nombre: "Pechuga al Grill", descripcion: "Con papas fritas, arroz y ensalada", precio: 34 },
+                { nombre: "Chaufa Amazónico", descripcion: "", precio: 31 }
+            ],
+            "Pizzas": [
+                { nombre: "Margarita", descripcion: "Pomodoro / mozarella / tomate / albahaca", precio: 43 },
+                { nombre: "Julieta", descripcion: "Pomodoro / mozarella / champignones / prosciutto / arúgula fresca", precio: 52 },
+                { nombre: "Pepperoni", descripcion: "Pepperoni / mozarella / salame", precio: 48 },
+                { nombre: "Americana", descripcion: "Pomodoro / mozarella / jamón inglés", precio: 45 },
+                { nombre: "Hawaiana", descripcion: "Pomodoro / mozarella / jamón inglés / piña", precio: 48 },
+                { nombre: "Vegetariana Tradicional", descripcion: "Pomodoro / mozarella / cebolla blanca / champignones / pimientos / aceitunas verdes", precio: 52 },
+                { nombre: "Jamón Crocante", descripcion: "Pomodoro / mozarella / cebolla caramelizada / tocino / jamón crocante", precio: 53 },
+                { nombre: "4 Quesos", descripcion: "Pomodoro / mozarella / queso suizo / andino / azul / arúgula fresca", precio: 53 },
+                { nombre: "Azul & Pera", descripcion: "Pomodoro / oliva / mozarella / queso azul / peras en almíbar / arúgula fresca", precio: 54 },
+                { nombre: "Slice x 2", descripcion: "Margarita / Americana / Hawaiana / Pepperoni / 4 Quesos", precio: 16 }
+            ],
+            "Postres": [
+                { nombre: "Carrot Cake", descripcion: "", precio: 15 },
+                { nombre: "Crema Volteada", descripcion: "", precio: 15 },
+                { nombre: "Torta de Chocolate", descripcion: "", precio: 15 },
+                { nombre: "Crocante de Manzana", descripcion: "", precio: 16 },
+                { nombre: "Pie de Limón", descripcion: "", precio: 15 },
+                { nombre: "Kekes", descripcion: "", precio: 7 },
+                { nombre: "Alfajor", descripcion: "", precio: 4.50 },
+                { nombre: "Brownie", descripcion: "", precio: 10 },
+                { nombre: "Galleta Chocochips", descripcion: "", precio: 8 },
+                { nombre: "Trufas", descripcion: "", precio: 3 }
+            ],
+            "Helados": [
+                { nombre: "Vaso 1 Bola", descripcion: "Incluye cono", precio: 10 },
+                { nombre: "Vaso 2 Bolas", descripcion: "Incluye cono", precio: 14 }
+            ],
+            "Jugos": [
+                { nombre: "Jugo Naranja / Fresa / Piña / Papaya", descripcion: "", precio: 12 },
+                { nombre: "Jugo Arándanos / Surtido", descripcion: "", precio: 16 }
+            ]
+        },
+        "San Isidro": {
+            "Desayunos": [
+                { nombre: "Desayuno Continental", descripcion: "Jugo (papaya/piña/naranja) + café (espresso/americano) + tostada con mantequilla, mermelada y dulce de leche", precio: 20 },
+                { nombre: "Americano", descripcion: "Jugo + café + huevos a elección (fritos/revueltos/duros) + pan tostado", precio: 23 },
+                { nombre: "Francés", descripcion: "Jugo + café americano + Croissant", precio: 20 },
+                { nombre: "Omellet Vegetariano", descripcion: "Jugo + café + champignones, espinaca, cebolla blanca + pan tostado", precio: 23 },
+                { nombre: "Omellet Julieta", descripcion: "Jugo + café + tocino, tomate, mozarella + pan tostado", precio: 23 },
+                { nombre: "Saludable", descripcion: "Jugo + café + huevos a elección + palta + pan", precio: 23 },
+                { nombre: "Apaltado", descripcion: "Jugo + café + pan tostado + palta + huevo frito", precio: 23 },
+                { nombre: "Mediterráneo", descripcion: "Jugo + café + pan tostado + queso crema + trucha y palta", precio: 27 },
+                { nombre: "Ciclista", descripcion: "Sánguche de pollo + parfait de yogurt con frutos rojos + café", precio: 30 },
+                { nombre: "Croissant", descripcion: "Croissant clásico", precio: 10 },
+                { nombre: "Croissant Julieta", descripcion: "Pesto + mozarella + jamón crocante", precio: 16 },
+                { nombre: "Croissant Mixto", descripcion: "Jamón crocante + edam + mozarella", precio: 14 },
+                { nombre: "Croissant Huevo & Tocino", descripcion: "Huevo + tocino + mayonesa", precio: 14 },
+                { nombre: "Flauta de Frankfurt", descripcion: "", precio: 12 },
+                { nombre: "Tostadas Francesas en Pan de Canela", descripcion: "", precio: 23 },
+                { nombre: "Acai Bowl", descripcion: "", precio: 20 },
+                { nombre: "Parfait de Yogurt", descripcion: "", precio: 22 }
+            ],
+            "Sánguches": [
+                { nombre: "Sánguche de Pejerrey", descripcion: "Pejerrey tempura + salsa criolla", precio: 16 },
+                { nombre: "Hamburguesa Julieta", descripcion: "Pan brioche + 150gr hamburguesa + mermelada de cebolla + mozarella + edam + tocino crocante", precio: 31 },
+                { nombre: "Sánguche 260", descripcion: "Pan + queso crema + salame + cebolla caramelizada flambeada", precio: 18 },
+                { nombre: "Bocatta de Jamón Serrano", descripcion: "Pan ciabatta + tomate refregado + aceite de oliva + queso + jamón serrano", precio: 21 },
+                { nombre: "Chicken Crunch", descripcion: "Pan brioche + pollo crocante + ensalada de col y zanahoria dulce + guacamole + arúgula", precio: 29 },
+                { nombre: "Sánguche de Asado", descripcion: "Sánguche tradicional con salsa de tomate", precio: 23 },
+                { nombre: "Sánguche de Pollo", descripcion: "Brioche bun + pollo con mayonesa", precio: 15 }
+            ],
+            "Piqueos / Tapas": [
+                { nombre: "Tequeños de Queso", descripcion: "Con salsa huancaina o guacamole", precio: 19 },
+                { nombre: "Tortilla Española", descripcion: "Con salchicha de Huacho", precio: 19 },
+                { nombre: "Salchipapa", descripcion: "Salchicha frankfurter + papas fritas + huevo montado", precio: 20 },
+                { nombre: "Empanada de Carne", descripcion: "", precio: 10 }
+            ],
+            "Entradas / Ensaladas": [
+                { nombre: "Poke 260", descripcion: "Pollo crocante / arroz base / col morada / choclo / palta / zanahoria / espinaca / piña", precio: 29 },
+                { nombre: "Poke Trucha Acebichada", descripcion: "Arroz base / lechuga / maíz chulpi / camote en chips / cebolla blanca / choclo / trucha ahumada", precio: 29 },
+                { nombre: "Julieta", descripcion: "Mix de lechugas / arúgula / trozos de pollo crocante / pico de gallo / chips de maíz", precio: 26 },
+                { nombre: "Caprese", descripcion: "Mozarella / tomate / albahaca", precio: 26 },
+                { nombre: "Crema de Zapallo", descripcion: "Con tostada de pan masa madre", precio: 18 }
+            ],
+            "Fondos": [
+                { nombre: "Pesto con Pollo al Panko", descripcion: "Spaghetti al pesto / pollo crocante / reducción de vino tinto", precio: 32 },
+                { nombre: "Lomo Saltado", descripcion: "Papas fritas / arroz blanco", precio: 35 },
+                { nombre: "Spaguetti a la Carbonara", descripcion: "", precio: 32 },
+                { nombre: "Enrrollado de Pollo", descripcion: "Con tocino y espinaca / puré de papas flambeado / arroz blanco", precio: 35 },
+                { nombre: "Pechuga al Grill", descripcion: "Con papas fritas, arroz y ensalada", precio: 34 },
+                { nombre: "Chaufa Amazónico", descripcion: "", precio: 31 }
+            ],
+            "Pizzas": [
+                { nombre: "Margarita", descripcion: "Pomodoro / mozarella / tomate / albahaca", precio: 43 },
+                { nombre: "Julieta", descripcion: "Pomodoro / mozarella / champignones / prosciutto / arúgula fresca", precio: 52 },
+                { nombre: "Pepperoni", descripcion: "Pepperoni / mozarella / salame", precio: 48 },
+                { nombre: "Hawaiana", descripcion: "Pomodoro / mozarella / jamón inglés / piña", precio: 48 },
+                { nombre: "4 Quesos", descripcion: "Pomodoro / mozarella / queso suizo / andino / azul / arúgula fresca", precio: 53 },
+                { nombre: "Azul & Pera", descripcion: "Pomodoro / oliva / mozarella / queso azul / peras en almíbar / arúgula fresca", precio: 54 },
+                { nombre: "Slice x 2", descripcion: "Margarita / Americana / Hawaiana / Pepperoni / 4 Quesos", precio: 16 }
+            ],
+            "Postres": [
+                { nombre: "Carrot Cake", descripcion: "", precio: 15 },
+                { nombre: "Crema Volteada", descripcion: "", precio: 15 },
+                { nombre: "Torta de Chocolate", descripcion: "", precio: 15 },
+                { nombre: "Crocante de Manzana", descripcion: "", precio: 16 },
+                { nombre: "Pie de Limón", descripcion: "", precio: 15 },
+                { nombre: "Kekes", descripcion: "", precio: 7 },
+                { nombre: "Alfajor", descripcion: "", precio: 4.50 },
+                { nombre: "Brownie", descripcion: "", precio: 10 },
+                { nombre: "Galleta Chocochips", descripcion: "", precio: 8 },
+                { nombre: "Trufas", descripcion: "", precio: 3 }
+            ],
+            "Helados": [
+                { nombre: "Vaso 1 Bola", descripcion: "Incluye cono", precio: 10 },
+                { nombre: "Vaso 2 Bolas", descripcion: "Incluye cono", precio: 14 }
+            ],
+            "Jugos": [
+                { nombre: "Jugo Naranja / Fresa / Piña / Papaya", descripcion: "", precio: 12 },
+                { nombre: "Jugo Arándanos / Surtido", descripcion: "", precio: 16 }
+            ]
+        }
+    };
+
+    // Función para renderizar el menú
+    function renderMenu(sede) {
+        const container = document.getElementById("menuContainer");
+        container.innerHTML = "";
+        
+        const categorias = Object.keys(menuData[sede]);
+        
+        categorias.forEach(categoria => {
+            const items = menuData[sede][categoria];
+            if (items && items.length > 0) {
+                const titulo = document.createElement("h3");
+                titulo.className = "categoria-titulo";
+                
+                // Iconos por categoría
+                let icono = "";
+                if (categoria === "Desayunos") icono = "🌅";
+                else if (categoria === "Sánguches") icono = "🥪";
+                else if (categoria === "Piqueos / Tapas") icono = "🍢";
+                else if (categoria === "Entradas / Ensaladas") icono = "🥗";
+                else if (categoria === "Fondos") icono = "🍝";
+                else if (categoria === "Pizzas") icono = "🍕";
+                else if (categoria === "Postres") icono = "🍰";
+                else if (categoria === "Helados") icono = "🍦";
+                else if (categoria === "Jugos") icono = "🥤";
+                
+                titulo.innerHTML = `${icono} ${categoria}`;
+                container.appendChild(titulo);
+                
+                const grid = document.createElement("div");
+                grid.className = "menu-grid";
+                
+                items.forEach(item => {
+                    const menuItem = document.createElement("div");
+                    menuItem.className = "menu-item";
+                    
+                    const infoDiv = document.createElement("div");
+                    infoDiv.className = "menu-info";
+                    
+                    const nameSpan = document.createElement("h4");
+                    nameSpan.textContent = item.nombre;
+                    infoDiv.appendChild(nameSpan);
+                    
+                    if (item.descripcion && item.descripcion !== "") {
+                        const descSpan = document.createElement("p");
+                        descSpan.textContent = item.descripcion;
+                        infoDiv.appendChild(descSpan);
+                    }
+                    
+                    const priceSpan = document.createElement("div");
+                    priceSpan.className = "menu-price";
+                    priceSpan.textContent = `S/ ${item.precio}`;
+                    
+                    menuItem.appendChild(infoDiv);
+                    menuItem.appendChild(priceSpan);
+                    grid.appendChild(menuItem);
+                });
+                
+                container.appendChild(grid);
+            }
+        });
+    }
+
+    // Event listeners para selector de sede
+    const sedeBtns = document.querySelectorAll('.sede-btn');
+    sedeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            sedeBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const sede = btn.getAttribute('data-sede');
+            renderMenu(sede);
+        });
+    });
+
+    // Carga inicial
+    renderMenu("Barranco");
+
+    // Preloader
+    window.addEventListener('load', () => {
+        const preloader = document.getElementById('preloader');
+        if(preloader) { setTimeout(() => { preloader.classList.add('hide'); setTimeout(() => { preloader.style.display = 'none'; }, 500); }, 800); }
+    });
+    
+    // Header scroll
+    const header = document.getElementById('header');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        if(window.scrollY > 100) { header.classList.add('scrolled'); backToTop.classList.add('show'); }
+        else { header.classList.remove('scrolled'); backToTop.classList.remove('show'); }
+    });
+    
+    // Mobile menu
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    if(hamburger && navMenu) {
+        hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navMenu.classList.toggle('active'); });
+        document.querySelectorAll('.nav-link').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('active'); navMenu.classList.remove('active'); }); });
+    }
+    
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if(targetId === '#') return;
+            const target = document.querySelector(targetId);
+            if(target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        });
+    });
+    
+    // Back to top
+    if(backToTop) { backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); }); }
+    
+    // Newsletter
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if(newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => { e.preventDefault(); const input = newsletterForm.querySelector('input'); if(input.value) { alert('¡Gracias por suscribirte! Recibirás nuestras novedades.'); input.value = ''; } });
+    }
+    
+    // Active nav on scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => { const sectionTop = section.offsetTop; const sectionHeight = section.clientHeight; if(scrollY >= (sectionTop - 200)) { current = section.getAttribute('id'); } });
+        navLinks.forEach(link => { link.classList.remove('active'); if(link.getAttribute('href') === `#${current}`) { link.classList.add('active'); } });
+    });
+    
+    console.log('Café Julieta - Menú completo con selector de sede cargado ✅');
+</script>
+</body>
+</html>

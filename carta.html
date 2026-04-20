@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Carta digital de Café Julieta - Menú completo de nuestras sedes en San Isidro y Barranco">
+    <meta name="author" content="Café Julieta">
+    <title>Café Julieta | Carta Digital</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ========== PALETA DE COLORES IGUAL A LA PÁGINA PRINCIPAL ========== */
+        :root {
+            --primary-color: #6F4E37;
+            --primary-dark: #5A3A2A;
+            --primary-light: #D4B8A8;
+            --secondary-color: #2C1810;
+            --text-color: #3E2723;
+            --text-light: #795548;
+            --bg-light: #FFF9F5;
+            --bg-cream: #FDF8F2;
+            --bg-warm: #FBF5EB;
+            --bg-dark: #2C1810;
+            --white: #FFFFFF;
+            --shadow-sm: 0 2px 10px rgba(0,0,0,0.05);
+            --shadow-md: 0 5px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+            
+            /* Colores específicos para cada sede */
+            --si-primary: #D4794A;
+            --si-primary-dark: #B85C2E;
+            --si-primary-light: #F0C4A8;
+            --si-bg: #FFF8F2;
+            
+            --ba-primary: #2E8B8B;
+            --ba-primary-dark: #206E6E;
+            --ba-primary-light: #A8D4D4;
+            --ba-bg: #F2F8F6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header de la carta */
+        .carta-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            padding: 2rem 0;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .back-link {
+            position: absolute;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+            transform: translateY(-50%) translateX(-3px);
+        }
+
+        .carta-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .carta-header p {
+            opacity: 0.85;
+            font-size: 0.9rem;
+        }
+
+        /* Selector de sede */
+        .sede-selector {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem auto;
+        }
+
+        .sede-btn {
+            padding: 0.8rem 2rem;
+            background: transparent;
+            border: 2px solid;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sede-btn[data-sede="San Isidro"] {
+            border-color: var(--si-primary);
+            color: var(--si-primary);
+        }
+
+        .sede-btn[data-sede="San Isidro"].active {
+            background: var(--si-primary);
+            color: white;
+        }
+
+        .sede-btn[data-sede="Barranco"] {
+            border-color: var(--ba-primary);
+            color: var(--ba-primary);
+        }
+
+        .sede-btn[data-sede="Barranco"].active {
+            background: var(--ba-primary);
+            color: white;
+        }
+
+        /* Contenedor del carrusel - MEJORADO PARA VISUALIZACIÓN */
+        .carrusel-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 2rem 3rem;
+            position: relative;
+        }
+
+        .carrusel-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            background: var(--white);
+        }
+
+        .carrusel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carrusel-slide {
+            min-width: 100%;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--white);
+        }
+
+        /* ESTILOS MEJORADOS PARA LAS IMÁGENES */
+        .carrusel-slide img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            max-height: 85vh;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 1rem;
+        }
+
+        /* Contenedor para imágenes más grandes con scroll si es necesario */
+        .carrusel-slide {
+            max-height: 85vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+
+        .carrusel-slide::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .carrusel-slide::-webkit-scrollbar-track {
+            background: var(--bg-cream);
+            border-radius: 10px;
+        }
+
+        .carrusel-slide::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 10px;
+        }
+
+        /* Botones de navegación */
+        .carrusel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(111, 78, 55, 0.85);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .carrusel-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .carrusel-btn.prev {
+            left: 1rem;
+        }
+
+        .carrusel-btn.next {
+            right: 1rem;
+        }
+
+        /* Indicadores/dots */
+        .carrusel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #D4B8A8;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            background: var(--primary-color);
+            width: 25px;
+            border-radius: 10px;
+        }
+
+        /* Contador de imágenes */
+        .image-counter {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-light);
+            background: var(--white);
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Información de la sede */
+        .sede-info {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding: 1.2rem;
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: var(--shadow-md);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sede-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .sede-info p {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .sede-info.san-isidro-info h3 { color: var(--si-primary); }
+        .sede-info.barranco-info h3 { color: var(--ba-primary); }
+
+        /* Footer */
+        .carta-footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--primary-color);
+            color: white;
+            margin-top: 2rem;
+        }
+
+        .carta-footer a {
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            transition: var(--transition);
+        }
+
+        .carta-footer a:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Indicador de carga */
+        .loading-indicator {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+        }
+
+        /* Zoom en hover para escritorio */
+        @media (min-width: 1024px) {
+            .carrusel-slide img {
+                transition: transform 0.3s ease;
+                cursor: zoom-in;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .carta-header h1 { font-size: 1.6rem; }
+            .back-link { left: 1rem; font-size: 0.8rem; }
+            .sede-btn { padding: 0.5rem 1.2rem; font-size: 0.85rem; gap: 0.3rem; }
+            .carrusel-btn { width: 35px; height: 35px; font-size: 0.9rem; }
+            .carrusel-btn.prev { left: 0.5rem; }
+            .carrusel-btn.next { right: 0.5rem; }
+            .carrusel-container { padding: 1rem; }
+            .carrusel-slide { max-height: 70vh; }
+            .image-counter { font-size: 0.75rem; }
+        }
+
+        /* Para tablets */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .carrusel-container { max-width: 90%; }
+            .carrusel-slide { max-height: 75vh; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="carta-header">
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Volver al inicio</a>
+    <h1><i class="fas fa-utensils"></i> Nuestra Carta</h1>
+    <p>Selecciona la sede para ver su menú completo</p>
+</header>
+
+<div class="sede-selector">
+    <button class="sede-btn active" data-sede="Barranco"><i class="fas fa-umbrella-beach"></i> Barranco</button>
+    <button class="sede-btn" data-sede="San Isidro"><i class="fas fa-building"></i> San Isidro</button>
+</div>
+
+<div class="carrusel-container">
+    <div class="carrusel-wrapper">
+        <button class="carrusel-btn prev" id="prevBtn" aria-label="Anterior página"><i class="fas fa-chevron-left"></i></button>
+        <div class="carrusel-track" id="carruselTrack">
+            <div class="loading-indicator">Cargando imágenes...</div>
+        </div>
+        <button class="carrusel-btn next" id="nextBtn" aria-label="Siguiente página"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <div class="carrusel-dots" id="carruselDots"></div>
+    <div class="image-counter" id="imageCounter"></div>
+</div>
+
+<div id="sedeInfo" class="sede-info barranco-info">
+    <h3>📍 Barranco</h3>
+    <p>Av. Miguel Grau 799 - 5 páginas de nuestro menú</p>
+    <p style="font-size: 0.8rem; margin-top: 0.3rem;">🍕 Pizzas · 🍝 Pastas · 🥗 Ensaladas · 🍢 Piqueos</p>
+</div>
+
+<footer class="carta-footer">
+    <a href="https://wa.me/51966525926" target="_blank"><i class="fab fa-whatsapp"></i> ¿Dudas? Contáctanos por WhatsApp</a>
+</footer>
+
+<script>
+    // Configuración de las imágenes por sede
+    const imagenesPorSede = {
+        "Barranco": [
+            "imagenes/BARRANCO 01.jpg",
+            "imagenes/BARRANCO 02.jpg",
+            "imagenes/BARRANCO 03.jpg",
+            "imagenes/BARRANCO 04.jpg",
+            "imagenes/BARRANCO 05.jpg"
+        ],
+        "San Isidro": [
+            "imagenes/SAN ISIDRO 01.jpg",
+            "imagenes/SAN ISIDRO 02.jpg"
+        ]
+    };
+
+    let currentSede = "Barranco";
+    let currentIndex = 0;
+    let totalImages = 0;
+
+    // Elementos del DOM
+    const carruselTrack = document.getElementById("carruselTrack");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const dotsContainer = document.getElementById("carruselDots");
+    const imageCounter = document.getElementById("imageCounter");
+    const sedeInfo = document.getElementById("sedeInfo");
+    const sedeBtns = document.querySelectorAll(".sede-btn");
+
+    // Función para cargar las imágenes de la sede seleccionada
+    function cargarCarrusel(sede) {
+        const imagenes = imagenesPorSede[sede];
+        totalImages = imagenes.length;
+        currentIndex = 0;
+
+        // Mostrar indicador de carga
+        carruselTrack.innerHTML = '<div class="loading-indicator"><i class="fas fa-spinner fa-pulse"></i> Cargando menú...</div>';
+        
+        // Limpiar dots
+        dotsContainer.innerHTML = "";
+
+        // Crear los slides con manejo de errores de carga
+        const slides = [];
+        
+        imagenes.forEach((imgSrc, index) => {
+            const slide = document.createElement("div");
+            slide.className = "carrusel-slide";
+            const img = document.createElement("img");
+            img.alt = `${sede} - Página ${index + 1}`;
+            
+            // Manejo de carga y errores
+            img.onload = () => {
+                // Verificar si todas las imágenes han cargado
+                const loadedImgs = document.querySelectorAll('.carrusel-slide img').length;
+                if (loadedImgs === totalImages) {
+                    // Todas las imágenes cargadas correctamente
+                }
+            };
+            
+            img.onerror = () => {
+                img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23f0f0f0"/><text x="200" y="150" font-family="Arial" font-size="14" fill="%23999" text-anchor="middle">Imagen no disponible</text><text x="200" y="170" font-family="Arial" font-size="12" fill="%23999" text-anchor="middle">${imgSrc.split('/').pop()}</text></svg>';
+                img.style.objectFit = "contain";
+            };
+            
+            img.src = imgSrc;
+            img.loading = "lazy";
+            slide.appendChild(img);
+            slides.push(slide);
+        });
+        
+        // Limpiar y agregar slides
+        carruselTrack.innerHTML = "";
+        slides.forEach(slide => carruselTrack.appendChild(slide));
+
+        // Actualizar posición del track
+        actualizarCarrusel();
+
+        // Crear dots
+        actualizarDots();
+
+        // Actualizar contador
+        actualizarContador();
+
+        // Actualizar información de la sede
+        actualizarInfoSede(sede);
+    }
+
+    // Actualizar la posición del carrusel
+    function actualizarCarrusel() {
+        const offset = -currentIndex * 100;
+        carruselTrack.style.transform = `translateX(${offset}%)`;
+        
+        // Actualizar dots activos
+        const dots = document.querySelectorAll(".dot");
+        dots.forEach((dot, index) => {
+            if (index === currentIndex) {
+                dot.classList.add("active");
+            } else {
+                dot.classList.remove("active");
+            }
+        });
+    }
+
+    // Crear/actualizar los dots (indicadores)
+    function actualizarDots() {
+        dotsContainer.innerHTML = "";
+        for (let i = 0; i < totalImages; i++) {
+            const dot = document.createElement("div");
+            dot.className = "dot";
+            if (i === currentIndex) dot.classList.add("active");
+            dot.addEventListener("click", () => {
+                currentIndex = i;
+                actualizarCarrusel();
+                actualizarContador();
+            });
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    // Actualizar el contador de imágenes
+    function actualizarContador() {
+        imageCounter.textContent = `📄 Página ${currentIndex + 1} de ${totalImages}`;
+    }
+
+    // Actualizar la información de la sede
+    function actualizarInfoSede(sede) {
+        if (sede === "Barranco") {
+            sedeInfo.className = "sede-info barranco-info";
+            sedeInfo.innerHTML = `
+                <h3>📍 Barranco</h3>
+                <p>Av. Miguel Grau 799 - ${totalImages} páginas de nuestro menú</p>
+                <p style="font-size: 0.8rem; margin-top: 0.3rem;">🍕 Pizzas · 🍝 Pastas · 🥗 Ensaladas · 🍢 Piqueos</p>
+                <p style="font-size: 0.7rem; margin-top: 0.5rem; opacity: 0.7;"><i class="fas fa-arrows-alt"></i> Puedes hacer zoom en la imagen</p>
+            `;
+        } else {
+            sedeInfo.className = "sede-info san-isidro-info";
+            sedeInfo.innerHTML = `
+                <h3>📍 San Isidro</h3>
+                <p>Los Libertadores 260 - ${totalImages} páginas de nuestro menú</p>
+                <p style="font-size: 0.8rem; margin-top: 0.3rem;">🌅 Desayunos · 🥪 Sánguches · 🍕 Pizzas · 🍰 Postres</p>
+                <p style="font-size: 0.7rem; margin-top: 0.5rem; opacity: 0.7;"><i class="fas fa-arrows-alt"></i> Puedes hacer zoom en la imagen</p>
+            `;
+        }
+    }
+
+    // Navegación
+    function nextImage() {
+        if (currentIndex < totalImages - 1) {
+            currentIndex++;
+            actualizarCarrusel();
+            actualizarContador();
+        }
+    }
+
+    function prevImage() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            actualizarCarrusel();
+            actualizarContador();
+        }
+    }
+
+    // Cambiar de sede
+    function cambiarSede(sede) {
+        currentSede = sede;
+        cargarCarrusel(sede);
+    }
+
+    // Event listeners
+    prevBtn.addEventListener("click", prevImage);
+    nextBtn.addEventListener("click", nextImage);
+
+    sedeBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            sedeBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            const sede = btn.getAttribute("data-sede");
+            cambiarSede(sede);
+        });
+    });
+
+    // Navegación con teclado (flechas izquierda/derecha)
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") {
+            prevImage();
+        } else if (e.key === "ArrowRight") {
+            nextImage();
+        }
+    });
+
+    // Gestos táctiles para móviles
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    const carruselWrapper = document.querySelector('.carrusel-wrapper');
+    
+    carruselWrapper.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    carruselWrapper.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        if (touchStartX - touchEndX > 50) {
+            nextImage();
+        } else if (touchEndX - touchStartX > 50) {
+            prevImage();
+        }
+    });
+
+    // Cargar carrusel inicial
+    cargarCarrusel("Barranco");
+
+    console.log("Carta digital de Café Julieta - Carrusel optimizado cargado ✅");
+</script>
+</body>
+</html>

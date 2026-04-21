@@ -1,1051 +1,1243 @@
- <!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-        <meta name="description" content="Café Julieta - Café de barrio en San Isidro y Barranco. Café de especialidad, desayunos, sánguches artesanales, pizzas, pastelería y más. Pet Friendly 🐶">
-        <meta name="keywords" content="cafetería, san isidro, barranco, café de especialidad, brunch, julieta, pet friendly, sándwiches, pizzas, desayunos">
-        <meta name="author" content="Café Julieta">
-        <title>Café Julieta | Café de Barrio en San Isidro y Barranco | Pet Friendly 🐶</title>
-        
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-        
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Café Julieta - Café de barrio en San Isidro y Barranco. Café de especialidad, desayunos, sánguches artesanales, pizzas, pastelería y más. Pet Friendly 🐶">
+    <meta name="keywords" content="cafetería, san isidro, barranco, café de especialidad, brunch, julieta, pet friendly, sándwiches, pizzas, desayunos">
+    <meta name="author" content="Café Julieta">
+    <title>Café Julieta | Café de Barrio en San Isidro y Barranco | Pet Friendly 🐶</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-            :root {
-                --primary-color: #6F4E37;
-                --primary-dark: #5A3A2A;
-                --primary-light: #D4B8A8;
-                --secondary-color: #2C1810;
-                --text-color: #3E2723;
-                --text-light: #795548;
-                --bg-light: #FFF9F5;
-                --bg-cream: #FDF8F2;
-                --bg-warm: #FBF5EB;
-                --bg-dark: #2C1810;
-                --white: #FFFFFF;
-                --shadow-sm: 0 2px 10px rgba(0,0,0,0.05);
-                --shadow-md: 0 5px 20px rgba(0,0,0,0.08);
-                --shadow-lg: 0 10px 30px rgba(0,0,0,0.1);
-                --transition: all 0.3s ease;
-                
-                /* Colores específicos para cada sede */
-                --si-primary: #D4794A;
-                --si-primary-dark: #B85C2E;
-                --si-primary-light: #F0C4A8;
-                --si-bg: #FFF8F2;
-                --si-card-bg: #FFFFFF;
-                
-                --ba-primary: #2E8B8B;
-                --ba-primary-dark: #206E6E;
-                --ba-primary-light: #A8D4D4;
-                --ba-bg: #F2F8F6;
-                --ba-card-bg: #FFFFFF;
-            }
-
-            body {
-                font-family: 'Poppins', sans-serif;
-                color: var(--text-color);
-                background-color: var(--bg-light);
-                line-height: 1.6;
-                overflow-x: hidden;
-            }
-
-            h1, h2, h3, h4, h5, h6 {
-                font-family: 'Playfair Display', serif;
-                font-weight: 600;
-            }
-
-            .container {
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 0 2rem;
-            }
-
-            .preloader {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: var(--bg-light);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 9999;
-                transition: opacity 0.5s;
-            }
-            .preloader.hide { opacity: 0; pointer-events: none; }
-            .loader {
-                width: 60px;
-                height: 60px;
-                border: 3px solid var(--primary-light);
-                border-top-color: var(--primary-color);
-                border-radius: 50%;
-                animation: spin 1s linear infinite;
-            }
-            @keyframes spin { to { transform: rotate(360deg); } }
-
-            .header {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                background: var(--white);
-                box-shadow: var(--shadow-sm);
-                z-index: 1000;
-                transition: var(--transition);
-            }
-            .header.scrolled {
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(10px);
-                box-shadow: var(--shadow-md);
-            }
-            .header-container {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 1rem 2rem;
-                max-width: 1400px;
-                margin: 0 auto;
-            }
-            .logo a {
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-                gap: 0.75rem;
-            }
-            .logo-img {
-                width: 50px;
-                height: 50px;
-                background: var(--primary-color);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.8rem;
-                color: var(--white);
-            }
-            .logo-text {
-                font-family: 'Playfair Display', serif;
-                font-size: 1.5rem;
-                font-weight: 700;
-                color: var(--secondary-color);
-            }
-            .logo-accent { color: var(--primary-color); }
-
-            .nav-menu {
-                display: flex;
-                gap: 2rem;
-                list-style: none;
-            }
-            .nav-link {
-                text-decoration: none;
-                color: var(--text-color);
-                font-weight: 500;
-                transition: var(--transition);
-                position: relative;
-            }
-            .nav-link::after {
-                content: '';
-                position: absolute;
-                bottom: -5px;
-                left: 0;
-                width: 0;
-                height: 2px;
-                background: var(--primary-color);
-                transition: var(--transition);
-            }
-            .nav-link:hover::after,
-            .nav-link.active::after { width: 100%; }
-            .nav-link:hover,
-            .nav-link.active { color: var(--primary-color); }
-
-            .hamburger { display: none; cursor: pointer; }
-            .bar {
-                display: block;
-                width: 25px;
-                height: 3px;
-                margin: 5px auto;
-                background: var(--text-color);
-                transition: var(--transition);
-            }
-
-            .hero {
-                position: relative;
-                height: 100vh;
-                min-height: 700px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                overflow: hidden;
-            }
-            .hero-overlay {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
-            }
-            .hero::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-image: url('https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=1600');
-                background-size: cover;
-                background-position: center;
-                background-attachment: fixed;
-                z-index: -1;
-            }
-            .hero-content {
-                position: relative;
-                z-index: 1;
-                color: var(--white);
-                max-width: 800px;
-                padding: 2rem;
-            }
-            .hero-badge {
-                display: inline-block;
-                background: rgba(111, 78, 55, 0.9);
-                padding: 0.3rem 1rem;
-                border-radius: 50px;
-                font-size: 0.85rem;
-                font-weight: 600;
-                margin-bottom: 1.5rem;
-            }
-            .hero-title {
-                font-size: 4rem;
-                font-weight: 800;
-                margin-bottom: 1rem;
-            }
-            .hero-title .highlight { color: #D4B8A8; }
-            .hero-subtitle {
-                font-size: 1.2rem;
-                margin-bottom: 2rem;
-                opacity: 0.9;
-            }
-            .hero-buttons {
-                display: flex;
-                gap: 1rem;
-                justify-content: center;
-                margin-bottom: 3rem;
-            }
-            .btn {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.5rem;
-                padding: 0.8rem 2rem;
-                border-radius: 50px;
-                text-decoration: none;
-                font-weight: 600;
-                transition: var(--transition);
-                cursor: pointer;
-                border: none;
-            }
-            .btn-primary {
-                background: var(--primary-color);
-                color: var(--white);
-            }
-            .btn-primary:hover {
-                background: var(--primary-dark);
-                transform: translateY(-2px);
-                box-shadow: var(--shadow-lg);
-            }
-            .btn-secondary {
-                background: transparent;
-                color: var(--white);
-                border: 2px solid var(--white);
-            }
-            .btn-secondary:hover {
-                background: var(--white);
-                color: var(--secondary-color);
-                transform: translateY(-2px);
-            }
-            .hero-stats {
-                display: flex;
-                justify-content: center;
-                gap: 3rem;
-            }
-            .stat { text-align: center; }
-            .stat-number {
-                display: block;
-                font-size: 1.8rem;
-                font-weight: 700;
-                color: #D4B8A8;
-            }
-            .stat-label { font-size: 0.85rem; opacity: 0.9; }
-
-            section { padding: 5rem 0; }
-            .section-header { margin-bottom: 3rem; }
-            .section-header.text-center { text-align: center; }
-            .section-tag {
-                display: inline-block;
-                color: var(--primary-color);
-                font-weight: 600;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                font-size: 0.85rem;
-                margin-bottom: 1rem;
-            }
-            .section-title {
-                font-size: 2.5rem;
-                color: var(--secondary-color);
-                margin-bottom: 1rem;
-            }
-            .section-divider {
-                width: 60px;
-                height: 3px;
-                background: var(--primary-color);
-                margin-top: 1rem;
-            }
-            .section-divider.center { margin: 1rem auto 0; }
-
-            .esencia { background: var(--bg-cream); }
-            .esencia-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 4rem;
-                align-items: center;
-            }
-            .esencia-text { margin-bottom: 1.5rem; line-height: 1.8; }
-            .esencia-features {
-                display: flex;
-                gap: 2rem;
-                margin-top: 2rem;
-                flex-wrap: wrap;
-            }
-            .feature {
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-            }
-            .feature i { color: var(--primary-color); font-size: 1.2rem; }
-            .esencia-image {
-                background: url('https://images.pexels.com/photos/3020919/pexels-photo-3020919.jpeg?auto=compress&cs=tinysrgb&w=600') center/cover;
-                border-radius: 1rem;
-                min-height: 400px;
-                box-shadow: var(--shadow-lg);
-            }
-
-            /* ========== SECCIÓN DE CARTA (VACÍA POR AHORA) ========== */
-            .carta-preview {
-                background: var(--bg-warm);
-                text-align: center;
-                padding: 4rem 2rem;
-            }
-            .carta-preview h2 {
-                font-size: 2rem;
-                color: var(--secondary-color);
-                margin-bottom: 1rem;
-            }
-            .carta-preview p {
-                color: var(--text-light);
-                margin-bottom: 2rem;
-                max-width: 600px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .carta-preview .btn {
-                background: var(--primary-color);
-                color: var(--white);
-                display: inline-flex;
-                align-items: center;
-                gap: 0.5rem;
-                padding: 1rem 2rem;
-                border-radius: 50px;
-                text-decoration: none;
-                font-weight: 600;
-                transition: var(--transition);
-            }
-            .carta-preview .btn:hover {
-                background: var(--primary-dark);
-                transform: translateY(-2px);
-                box-shadow: var(--shadow-lg);
-            }
-
-            .chef { background: var(--bg-cream); }
-            .chef-wrapper {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 4rem;
-                align-items: center;
-            }
-            .chef-image {
-                background: url('https://images.pexels.com/photos/3409966/pexels-photo-3409966.jpeg?auto=compress&cs=tinysrgb&w=600') center/cover;
-                border-radius: 1rem;
-                min-height: 500px;
-                box-shadow: var(--shadow-lg);
-                position: relative;
-            }
-            .chef-experience {
-                position: absolute;
-                bottom: -20px;
-                right: -20px;
-                background: var(--primary-color);
-                color: var(--white);
-                padding: 1.5rem;
-                border-radius: 1rem;
-                text-align: center;
-            }
-            .chef-bio { margin-bottom: 1.5rem; line-height: 1.8; }
-            .chef-quote {
-                background: var(--bg-warm);
-                padding: 1.5rem;
-                border-left: 3px solid var(--primary-color);
-                margin: 1.5rem 0;
-            }
-            .chef-quote i { color: var(--primary-color); margin-right: 1rem; }
-
-            /* ========== UBICACIÓN CON DIFERENCIACIÓN ========== */
-            .ubicacion { background: var(--bg-light); }
+        :root {
+            --primary-color: #6F4E37;
+            --primary-dark: #5A3A2A;
+            --primary-light: #D4B8A8;
+            --secondary-color: #2C1810;
+            --text-color: #3E2723;
+            --text-light: #795548;
+            --bg-light: #FFF9F5;
+            --bg-cream: #FDF8F2;
+            --bg-warm: #FBF5EB;
+            --bg-dark: #2C1810;
+            --white: #FFFFFF;
+            --shadow-sm: 0 2px 10px rgba(0,0,0,0.05);
+            --shadow-md: 0 5px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
             
-            .pet-friendly-wrapper {
-                display: flex;
-                justify-content: center;
-                margin-bottom: 3rem;
-            }
-            .pet-friendly-banner {
-                background: linear-gradient(135deg, #6F4E37 0%, #8B6348 100%);
-                border-radius: 60px;
-                padding: 1rem 2.5rem;
-                display: inline-flex;
-                align-items: center;
-                gap: 1rem;
+            /* Colores específicos para cada sede */
+            --si-primary: #D4794A;
+            --si-primary-dark: #B85C2E;
+            --si-primary-light: #F0C4A8;
+            --si-bg: #FFF8F2;
+            --si-card-bg: #FFFFFF;
+            
+            --ba-primary: #2E8B8B;
+            --ba-primary-dark: #206E6E;
+            --ba-primary-light: #A8D4D4;
+            --ba-bg: #F2F8F6;
+            --ba-card-bg: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+        .preloader.hide { opacity: 0; pointer-events: none; }
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--primary-light);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-md);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .logo a {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--white);
+        }
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+        .logo-accent { color: var(--primary-color); }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after { width: 100%; }
+        .nav-link:hover,
+        .nav-link.active { color: var(--primary-color); }
+
+        .hamburger { display: none; cursor: pointer; }
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=1600');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: var(--white);
+            max-width: 800px;
+            padding: 2rem;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(111, 78, 55, 0.9);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        .hero-title .highlight { color: #D4B8A8; }
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+        }
+        .stat { text-align: center; }
+        .stat-number {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #D4B8A8;
+        }
+        .stat-label { font-size: 0.85rem; opacity: 0.9; }
+
+        section { padding: 5rem 0; }
+        .section-header { margin-bottom: 3rem; }
+        .section-header.text-center { text-align: center; }
+        .section-tag {
+            display: inline-block;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        .section-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+            margin-top: 1rem;
+        }
+        .section-divider.center { margin: 1rem auto 0; }
+
+        /* ========== SECCIÓN ESENCIA CON CARRUSEL AUTOMÁTICO ========== */
+        .esencia { background: var(--bg-cream); }
+        .esencia-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .esencia-content {
+            padding-right: 1rem;
+        }
+        
+        .esencia-text { margin-bottom: 1.5rem; line-height: 1.8; color: var(--text-light); }
+        
+        .esencia-features {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .feature i { color: var(--primary-color); font-size: 1.2rem; }
+        
+        /* Carrusel de imágenes */
+        .esencia-carrusel {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            background: var(--white);
+        }
+        
+        .carrusel-imagenes {
+            position: relative;
+            width: 100%;
+            min-height: 400px;
+        }
+        
+        .carrusel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+        
+        .carrusel-slide.active {
+            opacity: 1;
+            position: relative;
+        }
+        
+        .carrusel-slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+            border-radius: 1rem;
+        }
+        
+        /* Indicadores del carrusel */
+        .carrusel-indicadores {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .indicador {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .indicador.active {
+            background: var(--primary-color);
+            width: 25px;
+            border-radius: 10px;
+        }
+        
+        .indicador:hover {
+            background: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        /* ========== SECCIÓN DE CARTA (REDIRECCIÓN) ========== */
+        .carta-preview {
+            background: var(--bg-warm);
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        .carta-preview h2 {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        .carta-preview p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .carta-preview .btn {
+            background: var(--primary-color);
+            color: var(--white);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .carta-preview .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ========== SECCIÓN CHEF CON VIDEO ========== */
+        .chef { background: var(--bg-cream); }
+        .chef-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .chef-video {
+            position: relative;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            max-width: 450px;
+            margin: 0 auto;
+            width: 100%;
+            background-color: var(--bg-dark);
+        }
+
+        .chef-video-element {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            display: block;
+        }
+
+        .chef-info {
+            padding: 0.5rem;
+        }
+
+        .chef-bio { margin-bottom: 1.2rem; line-height: 1.7; color: var(--text-light); font-size: 0.9rem; }
+        
+        .chef-quote {
+            background: var(--white);
+            padding: 1rem;
+            border-left: 4px solid var(--primary-color);
+            margin: 1.2rem 0;
+            font-style: italic;
+            font-size: 0.85rem;
+            color: var(--text-color);
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .chef-quote i { color: var(--primary-color); margin-right: 0.8rem; }
+
+        /* ========== UBICACIÓN CON DIFERENCIACIÓN ========== */
+        .ubicacion { background: var(--bg-light); }
+        
+        .pet-friendly-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+        .pet-friendly-banner {
+            background: linear-gradient(135deg, #6F4E37 0%, #8B6348 100%);
+            border-radius: 60px;
+            padding: 1rem 2.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+        .pet-friendly-banner:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        .pet-icon {
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+        .pet-text {
+            text-align: left;
+        }
+        .pet-text h4 {
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        .pet-text p {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+        
+        .sedes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Tarjeta San Isidro */
+        .sede-card.san-isidro-card {
+            border: 2px solid var(--si-primary-light);
+        }
+        .sede-card.san-isidro-card .sede-header {
+            background: linear-gradient(135deg, var(--si-primary), var(--si-primary-dark));
+        }
+        .sede-card.san-isidro-card .sede-info i {
+            color: var(--si-primary);
+        }
+        .sede-card.san-isidro-card .pet-badge {
+            background: rgba(212, 121, 74, 0.15);
+            color: var(--si-primary);
+        }
+        .sede-card.san-isidro-card .btn-maps {
+            background: rgba(212, 121, 74, 0.1);
+            color: var(--si-primary);
+        }
+        .sede-card.san-isidro-card .btn-maps:hover {
+            background: var(--si-primary);
+            color: white;
+        }
+        
+        /* Tarjeta Barranco */
+        .sede-card.barranco-card {
+            border: 2px solid var(--ba-primary-light);
+        }
+        .sede-card.barranco-card .sede-header {
+            background: linear-gradient(135deg, var(--ba-primary), var(--ba-primary-dark));
+        }
+        .sede-card.barranco-card .sede-info i {
+            color: var(--ba-primary);
+        }
+        .sede-card.barranco-card .pet-badge {
+            background: rgba(46, 139, 139, 0.15);
+            color: var(--ba-primary);
+        }
+        .sede-card.barranco-card .btn-maps {
+            background: rgba(46, 139, 139, 0.1);
+            color: var(--ba-primary);
+        }
+        .sede-card.barranco-card .btn-maps:hover {
+            background: var(--ba-primary);
+            color: white;
+        }
+        
+        .sede-card {
+            background: var(--white);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+        .sede-card:hover {
+            transform: translateY(-5px);
+        }
+        .sede-header {
+            color: var(--white);
+            padding: 1.2rem;
+            text-align: center;
+        }
+        .sede-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+        .sede-header p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        .sede-body {
+            padding: 1.5rem;
+        }
+        .sede-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .sede-info i {
+            font-size: 1.3rem;
+            min-width: 30px;
+            margin-top: 0.2rem;
+        }
+        .sede-info .info-content {
+            flex: 1;
+        }
+        .sede-info .info-content strong {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.2rem;
+        }
+        .sede-info .info-content p {
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+        .pet-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        .sede-map {
+            margin-top: 1rem;
+            border-radius: 1rem;
+            overflow: hidden;
+            height: 180px;
+        }
+        .sede-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .btn-maps {
+            display: block;
+            text-align: center;
+            padding: 0.6rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            transition: var(--transition);
+        }
+
+        .reservas {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--white);
+            text-align: center;
+        }
+        .reservas-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .reservas-text h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .reservas-text p { opacity: 0.9; }
+
+        .footer {
+            background: var(--bg-dark);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer-about p { margin: 1rem 0; color: #D4B8A8; }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        .social-links a {
+            color: var(--white);
+            background: rgba(255,255,255,0.1);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        .footer-links ul, .footer-hours ul { list-style: none; }
+        .footer-links li, .footer-hours li { margin-bottom: 0.8rem; }
+        .footer-links a {
+            color: #D4B8A8;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer-links a:hover { color: var(--primary-color); }
+        .footer-hours span { font-weight: 600; color: var(--white); }
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+        }
+        .newsletter-form input::placeholder { color: #D4B8A8; }
+        .newsletter-form button {
+            background: var(--primary-color);
+            border: none;
+            padding: 0 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .newsletter-form button:hover { background: var(--primary-dark); }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #D4B8A8;
+            font-size: 0.85rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+        }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        @media (max-width: 968px) {
+            .hamburger { display: block; }
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--white);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
                 box-shadow: var(--shadow-md);
-                transition: var(--transition);
+                padding: 2rem 0;
             }
-            .pet-friendly-banner:hover {
-                transform: translateY(-3px);
-                box-shadow: var(--shadow-lg);
+            .nav-menu.active { left: 0; }
+            .hero-title { font-size: 2.5rem; }
+            .esencia-grid, .chef-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
-            .pet-icon {
-                background: rgba(255,255,255,0.2);
-                border-radius: 50%;
-                width: 48px;
-                height: 48px;
-                display: flex;
-                align-items: center;
+            .esencia-content {
+                order: 2;
+            }
+            .esencia-carrusel {
+                order: 1;
+            }
+            .chef-video {
+                max-width: 100%;
+            }
+            .sedes-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .reservas-content { flex-direction: column; text-align: center; }
+            .pet-friendly-banner {
+                padding: 0.8rem 1.5rem;
+                flex-wrap: wrap;
                 justify-content: center;
-                font-size: 1.8rem;
+                text-align: center;
             }
             .pet-text {
-                text-align: left;
-            }
-            .pet-text h4 {
-                color: var(--white);
-                font-size: 1.1rem;
-                font-weight: 600;
-                margin: 0;
-                font-family: 'Poppins', sans-serif;
-            }
-            .pet-text p {
-                color: rgba(255,255,255,0.9);
-                font-size: 0.85rem;
-                margin: 0;
-            }
-            
-            .sedes-grid {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
-                margin-bottom: 2rem;
-            }
-            
-            /* Tarjeta San Isidro */
-            .sede-card.san-isidro-card {
-                border: 2px solid var(--si-primary-light);
-            }
-            .sede-card.san-isidro-card .sede-header {
-                background: linear-gradient(135deg, var(--si-primary), var(--si-primary-dark));
-            }
-            .sede-card.san-isidro-card .sede-info i {
-                color: var(--si-primary);
-            }
-            .sede-card.san-isidro-card .pet-badge {
-                background: rgba(212, 121, 74, 0.15);
-                color: var(--si-primary);
-            }
-            .sede-card.san-isidro-card .btn-maps {
-                background: rgba(212, 121, 74, 0.1);
-                color: var(--si-primary);
-            }
-            .sede-card.san-isidro-card .btn-maps:hover {
-                background: var(--si-primary);
-                color: white;
-            }
-            
-            /* Tarjeta Barranco */
-            .sede-card.barranco-card {
-                border: 2px solid var(--ba-primary-light);
-            }
-            .sede-card.barranco-card .sede-header {
-                background: linear-gradient(135deg, var(--ba-primary), var(--ba-primary-dark));
-            }
-            .sede-card.barranco-card .sede-info i {
-                color: var(--ba-primary);
-            }
-            .sede-card.barranco-card .pet-badge {
-                background: rgba(46, 139, 139, 0.15);
-                color: var(--ba-primary);
-            }
-            .sede-card.barranco-card .btn-maps {
-                background: rgba(46, 139, 139, 0.1);
-                color: var(--ba-primary);
-            }
-            .sede-card.barranco-card .btn-maps:hover {
-                background: var(--ba-primary);
-                color: white;
-            }
-            
-            .sede-card {
-                background: var(--white);
-                border-radius: 1.5rem;
-                overflow: hidden;
-                box-shadow: var(--shadow-lg);
-                transition: var(--transition);
-            }
-            .sede-card:hover {
-                transform: translateY(-5px);
-            }
-            .sede-header {
-                color: var(--white);
-                padding: 1.2rem;
                 text-align: center;
             }
-            .sede-header h3 {
-                font-size: 1.5rem;
-                margin-bottom: 0.3rem;
+            .carrusel-slide img {
+                height: 300px;
             }
-            .sede-header p {
-                font-size: 0.85rem;
-                opacity: 0.9;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 0 1rem; }
+            section { padding: 3rem 0; }
+            .section-title { font-size: 2rem; }
+            .carrusel-slide img {
+                height: 250px;
             }
-            .sede-body {
-                padding: 1.5rem;
-            }
-            .sede-info {
-                display: flex;
-                align-items: flex-start;
-                gap: 1rem;
-                margin-bottom: 1.2rem;
-            }
-            .sede-info i {
-                font-size: 1.3rem;
-                min-width: 30px;
-                margin-top: 0.2rem;
-            }
-            .sede-info .info-content {
-                flex: 1;
-            }
-            .sede-info .info-content strong {
-                display: block;
-                font-size: 0.75rem;
-                color: var(--text-light);
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                margin-bottom: 0.2rem;
-            }
-            .sede-info .info-content p {
-                font-weight: 500;
-                color: var(--secondary-color);
-            }
-            .pet-badge {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.4rem;
-                padding: 0.3rem 0.8rem;
-                border-radius: 50px;
-                font-size: 0.75rem;
-                font-weight: 600;
-                margin-top: 0.5rem;
-            }
-            .sede-map {
-                margin-top: 1rem;
-                border-radius: 1rem;
-                overflow: hidden;
-                height: 180px;
-            }
-            .sede-map iframe {
-                width: 100%;
-                height: 100%;
-                border: 0;
-            }
-            .btn-maps {
-                display: block;
-                text-align: center;
-                padding: 0.6rem;
-                border-radius: 50px;
-                text-decoration: none;
-                font-weight: 600;
-                font-size: 0.85rem;
-                margin-top: 1rem;
-                transition: var(--transition);
-            }
+        }
+    </style>
+</head>
+<body>
 
-            .reservas {
-                background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-                color: var(--white);
-                text-align: center;
-            }
-            .reservas-content {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                gap: 2rem;
-                flex-wrap: wrap;
-            }
-            .reservas-text h2 { font-size: 2rem; margin-bottom: 0.5rem; }
-            .reservas-text p { opacity: 0.9; }
+<div class="preloader" id="preloader"><div class="loader"></div></div>
 
-            .footer {
-                background: var(--bg-dark);
-                color: var(--white);
-                padding: 3rem 0 1rem;
-            }
-            .footer-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 2rem;
-                margin-bottom: 2rem;
-            }
-            .footer-about p { margin: 1rem 0; color: #D4B8A8; }
-            .social-links {
-                display: flex;
-                gap: 1rem;
-            }
-            .social-links a {
-                color: var(--white);
-                background: rgba(255,255,255,0.1);
-                width: 40px;
-                height: 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 50%;
-                transition: var(--transition);
-            }
-            .social-links a:hover {
-                background: var(--primary-color);
-                transform: translateY(-2px);
-            }
-            .footer-links ul, .footer-hours ul { list-style: none; }
-            .footer-links li, .footer-hours li { margin-bottom: 0.8rem; }
-            .footer-links a {
-                color: #D4B8A8;
-                text-decoration: none;
-                transition: var(--transition);
-            }
-            .footer-links a:hover { color: var(--primary-color); }
-            .footer-hours span { font-weight: 600; color: var(--white); }
-            .newsletter-form {
-                display: flex;
-                gap: 0.5rem;
-                margin-top: 1rem;
-            }
-            .newsletter-form input {
-                flex: 1;
-                padding: 0.8rem;
-                border: none;
-                border-radius: 0.5rem;
-                background: rgba(255,255,255,0.1);
-                color: var(--white);
-            }
-            .newsletter-form input::placeholder { color: #D4B8A8; }
-            .newsletter-form button {
-                background: var(--primary-color);
-                border: none;
-                padding: 0 1rem;
-                border-radius: 0.5rem;
-                cursor: pointer;
-                transition: var(--transition);
-            }
-            .newsletter-form button:hover { background: var(--primary-dark); }
-            .footer-bottom {
-                text-align: center;
-                padding-top: 2rem;
-                border-top: 1px solid rgba(255,255,255,0.1);
-                color: #D4B8A8;
-                font-size: 0.85rem;
-            }
-
-            .back-to-top {
-                position: fixed;
-                bottom: 2rem;
-                right: 2rem;
-                width: 50px;
-                height: 50px;
-                background: var(--primary-color);
-                color: var(--white);
-                border: none;
-                border-radius: 50%;
-                cursor: pointer;
-                opacity: 0;
-                visibility: hidden;
-                transition: var(--transition);
-                z-index: 99;
-            }
-            .back-to-top.show { opacity: 1; visibility: visible; }
-            .back-to-top:hover {
-                background: var(--primary-dark);
-                transform: translateY(-3px);
-            }
-
-            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-            @media (max-width: 968px) {
-                .hamburger { display: block; }
-                .hamburger.active .bar:nth-child(2) { opacity: 0; }
-                .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-                .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-                .nav-menu {
-                    position: fixed;
-                    left: -100%;
-                    top: 70px;
-                    flex-direction: column;
-                    background: var(--white);
-                    width: 100%;
-                    text-align: center;
-                    transition: 0.3s;
-                    box-shadow: var(--shadow-md);
-                    padding: 2rem 0;
-                }
-                .nav-menu.active { left: 0; }
-                .hero-title { font-size: 2.5rem; }
-                .esencia-grid, .chef-wrapper {
-                    grid-template-columns: 1fr;
-                    gap: 2rem;
-                }
-                .sedes-grid {
-                    grid-template-columns: 1fr;
-                }
-                .hero-buttons { flex-direction: column; align-items: center; }
-                .reservas-content { flex-direction: column; text-align: center; }
-                .pet-friendly-banner {
-                    padding: 0.8rem 1.5rem;
-                    flex-wrap: wrap;
-                    justify-content: center;
-                    text-align: center;
-                }
-                .pet-text {
-                    text-align: center;
-                }
-            }
-            @media (max-width: 768px) {
-                .container { padding: 0 1rem; }
-                section { padding: 3rem 0; }
-                .section-title { font-size: 2rem; }
-            }
-        </style>
-    </head>
-    <body>
-
-    <div class="preloader" id="preloader"><div class="loader"></div></div>
-
-    <header class="header" id="header">
-        <div class="header-container">
-            <div class="logo">
-                <a href="#inicio">
-                    <div class="logo-img">☕</div>
-                    <div class="logo-text">JULIETA <span class="logo-accent">CAFÉ DE BARRIO</span></div>
-                </a>
-            </div>
-            <nav class="navbar">
-                <ul class="nav-menu">
-                    <li class="nav-item"><a href="#inicio" class="nav-link active">Inicio</a></li>
-                    <li class="nav-item"><a href="#esencia" class="nav-link">El Café</a></li>
-                    <li class="nav-item"><a href="#" id="menuLink" class="nav-link">Menú</a></li>
-                    <li class="nav-item"><a href="#chef" class="nav-link">Nuestro Barista</a></li>
-                    <li class="nav-item"><a href="#ubicacion" class="nav-link">Ubicación</a></li>
-                </ul>
-                <div class="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
-            </nav>
+<header class="header" id="header">
+    <div class="header-container">
+        <div class="logo">
+            <a href="#inicio">
+                <div class="logo-img">☕</div>
+                <div class="logo-text">JULIETA <span class="logo-accent">CAFÉ DE BARRIO</span></div>
+            </a>
         </div>
-    </header>
+        <nav class="navbar">
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#inicio" class="nav-link active">Inicio</a></li>
+                <li class="nav-item"><a href="#esencia" class="nav-link">El Café</a></li>
+                <li class="nav-item"><a href="#" id="menuLink" class="nav-link">Menú</a></li>
+                <li class="nav-item"><a href="#chef" class="nav-link">Nuestro Barista</a></li>
+                <li class="nav-item"><a href="#ubicacion" class="nav-link">Ubicación</a></li>
+            </ul>
+            <div class="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+        </nav>
+    </div>
+</header>
 
-    <main>
-        <section id="inicio" class="hero">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <div class="hero-badge">San Isidro · Barranco</div>
-                <h1 class="hero-title">JULIETA <span class="highlight">CAFÉ DE BARRIO</span></h1>
-                <p class="hero-subtitle">Café de especialidad · Desayunos · Sánguches · Pizzas artesanales · Pastelería · 🐶 Pet Friendly</p>
-                <div class="hero-buttons">
-                    <a href="#" id="heroMenuBtn" class="btn btn-primary">Ver Menú <i class="fas fa-arrow-right"></i></a>
-                    <a href="#ubicacion" class="btn btn-secondary">Nuestras Sedes <i class="fas fa-map-marker-alt"></i></a>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat"><span class="stat-number">100%</span><span class="stat-label">Café de especialidad</span></div>
-                    <div class="stat"><span class="stat-number">Casero</span><span class="stat-label">Pan y pastelería</span></div>
-                    <div class="stat"><span class="stat-number">🐶</span><span class="stat-label">Pet Friendly</span></div>
-                </div>
+<main>
+    <section id="inicio" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">San Isidro · Barranco</div>
+            <h1 class="hero-title">JULIETA <span class="highlight">CAFÉ DE BARRIO</span></h1>
+            <p class="hero-subtitle">Café de especialidad · Desayunos · Sánguches · Pizzas artesanales · Pastelería · 🐶 Pet Friendly</p>
+            <div class="hero-buttons">
+                <a href="#" id="heroMenuBtn" class="btn btn-primary">Ver Menú <i class="fas fa-arrow-right"></i></a>
+                <a href="#ubicacion" class="btn btn-secondary">Nuestras Sedes <i class="fas fa-map-marker-alt"></i></a>
             </div>
-        </section>
-
-        <section id="esencia" class="esencia">
-            <div class="container">
-                <div class="esencia-grid">
-                    <div class="esencia-content">
-                        <div class="section-header">
-                            <span class="section-tag">Nuestra esencia</span>
-                            <h2 class="section-title">Un café con alma de barrio</h2>
-                            <div class="section-divider"></div>
-                        </div>
-                        <p class="esencia-text">En Café Julieta creemos que una buena taza de café puede cambiar tu día. Somos un espacio acogedor en San Isidro y Barranco donde la tradición del café de especialidad se encuentra con la calidez de un barrio.</p>
-                        <p class="esencia-text">Nuestros granos son seleccionados cuidadosamente de fincas sostenibles, tostados artesanalmente para resaltar sus notas únicas. Acompañamos cada preparación con repostería casera hecha con amor.</p>
-                        <div class="esencia-features">
-                            <div class="feature"><i class="fas fa-seedling"></i><span>Granos de origen</span></div>
-                            <div class="feature"><i class="fas fa-mug-hot"></i><span>Tostado artesanal</span></div>
-                            <div class="feature"><i class="fas fa-heart"></i><span>Pasión por el detalle</span></div>
-                            <div class="feature"><i class="fas fa-dog"></i><span>Pet Friendly</span></div>
-                        </div>
-                    </div>
-                    <div class="esencia-image"></div>
-                </div>
+            <div class="hero-stats">
+                <div class="stat"><span class="stat-number">100%</span><span class="stat-label">Café de especialidad</span></div>
+                <div class="stat"><span class="stat-number">Casero</span><span class="stat-label">Pan y pastelería</span></div>
+                <div class="stat"><span class="stat-number">🐶</span><span class="stat-label">Pet Friendly</span></div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Sección de Carta - Redirige a carta.html -->
-        <section class="carta-preview">
-            <div class="container">
-                <div class="section-header text-center">
-                    <span class="section-tag">Descubre nuestros sabores</span>
-                    <h2 class="section-title">Nuestra Carta</h2>
-                    <div class="section-divider center"></div>
-                </div>
-                <p>Explora nuestro menú completo con todas nuestras especialidades, desde desayunos hasta cenas, pasando por nuestros famosos sánguches y pizzas artesanales.</p>
-                <a href="#" id="cartaPreviewBtn" class="btn">Ver Carta Digital <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </section>
-
-        <section id="chef" class="chef">
-            <div class="container">
-                <div class="chef-wrapper">
-                    <div class="chef-image">
-                        <div class="chef-experience"><span class="exp-number">10+</span><span class="exp-text">Años tostando</span></div>
-                    </div>
-                    <div class="chef-info">
-                        <div class="section-header"><span class="section-tag">Nuestro Maestro</span><h2 class="section-title">Carlos & el equipo</h2><div class="section-divider"></div></div>
-                        <p class="chef-bio">Detrás de cada taza hay un equipo apasionado por el café. Carlos, nuestro barista principal, ha recorrido fincas cafetaleras de Cajamarca y Junín para seleccionar los mejores granos.</p>
-                        <p class="chef-bio">En Café Julieta, cada preparación es un homenaje a la cultura cafetera peruana. Desde el espresso hasta nuestros cold brews, cuidamos cada detalle para que vivas una experiencia única.</p>
-                        <div class="chef-quote"><i class="fas fa-quote-left"></i><p>Un buen café no solo se toma, se siente. Es el resultado del trabajo de muchas manos que aman lo que hacen.</p></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="ubicacion" class="ubicacion">
-            <div class="container">
-                <div class="section-header text-center">
-                    <span class="section-tag">Visítanos</span>
-                    <h2 class="section-title">Nuestras Sedes</h2>
-                    <div class="section-divider center"></div>
-                    <p class="section-subtitle">Dos ubicaciones para disfrutar de la experiencia Julieta</p>
-                </div>
-                
-                <div class="pet-friendly-wrapper">
-                    <div class="pet-friendly-banner">
-                        <div class="pet-icon"><i class="fas fa-paw"></i></div>
-                        <div class="pet-text">
-                            <h4>🐶 Pet Friendly</h4>
-                            <p>¡Tu mascota es bienvenida! Contamos con espacios adaptados</p>
-                        </div>
-                        <i class="fas fa-heart" style="opacity: 0.7;"></i>
-                    </div>
-                </div>
-                
-                <div class="sedes-grid">
-                    <!-- Sede San Isidro -->
-                    <div class="sede-card san-isidro-card">
-                        <div class="sede-header">
-                            <h3>📍 San Isidro</h3>
-                            <p>Los Libertadores 260</p>
-                        </div>
-                        <div class="sede-body">
-                            <div class="sede-info"><i class="fas fa-clock"></i><div class="info-content"><strong>Horario</strong><p>Lunes a Domingo · 8:00 am - 9:30 pm</p></div></div>
-                            <div class="sede-info"><i class="fas fa-phone-alt"></i><div class="info-content"><strong>Contacto</strong><p>+51 966 525 926</p></div></div>
-                            <div class="sede-info"><i class="fas fa-dog"></i><div class="info-content"><strong>Mascotas</strong><p>🐶 Espacio Pet Friendly</p><span class="pet-badge"><i class="fas fa-paw"></i> Bienvenidos</span></div></div>
-                            <div class="sede-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.5000!2d-77.0312!3d-12.0995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c7e0b2e5b5b5%3A0x7e2e0c0e0e0e0e0!2sLos%20Libertadores%20260%2C%20San%20Isidro!5e0!3m2!1sen!2spe!4v1713040000000!5m2!1sen!2spe" allowfullscreen="" loading="lazy"></iframe></div>
-                            <a href="https://maps.google.com/?q=Los+Libertadores+260+San+Isidro" target="_blank" class="btn-maps"><i class="fas fa-directions"></i> Cómo llegar</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Sede Barranco -->
-                    <div class="sede-card barranco-card">
-                        <div class="sede-header">
-                            <h3>📍 Barranco</h3>
-                            <p>Av. Miguel Grau 799</p>
-                        </div>
-                        <div class="sede-body">
-                            <div class="sede-info"><i class="fas fa-clock"></i><div class="info-content"><strong>Horario</strong><p>Lunes a Domingo · 8:00 am - 9:00 pm</p></div></div>
-                            <div class="sede-info"><i class="fas fa-phone-alt"></i><div class="info-content"><strong>Contacto</strong><p>+51 966 525 926</p></div></div>
-                            <div class="sede-info"><i class="fas fa-dog"></i><div class="info-content"><strong>Mascotas</strong><p>🐶 Espacio Pet Friendly</p><span class="pet-badge"><i class="fas fa-paw"></i> Bienvenidos</span></div></div>
-                            <div class="sede-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.853353574924!2d-77.024059!3d-12.146737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b71c2e7d0e0f%3A0x7e2e0c0e0e0e0e0!2sAv.%20Almte.%20Miguel%20Grau%20799%2C%20Barranco%2015063!5e0!3m2!1sen!2spe!4v1713040000000!5m2!1sen!2spe" allowfullscreen="" loading="lazy"></iframe></div>
-                            <a href="https://maps.google.com/?q=Av+Miguel+Grau+799+Barranco" target="_blank" class="btn-maps"><i class="fas fa-directions"></i> Cómo llegar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="reservas">
-            <div class="container">
-                <div class="reservas-content">
-                    <div class="reservas-text">
-                        <h2>¿Quieres una experiencia especial?</h2>
-                        <p>🐶 Tu mascota también es bienvenida · Escríbenos para reservas o eventos privados</p>
-                    </div>
-                    <a href="https://wa.me/51966525926" class="btn btn-primary btn-large"><i class="fab fa-whatsapp"></i> Contáctanos por WhatsApp</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
+    <!-- Sección Esencia con Carrusel Automático -->
+    <section id="esencia" class="esencia">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-about">
-                    <div class="footer-logo"><span class="logo-icon">☕</span><span class="logo-text">JULIETA CAFÉ</span></div>
-                    <p>Café de barrio en San Isidro y Barranco, donde cada taza cuenta una historia. 🐶 Pet Friendly</p>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/cafe.julieta/" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://wa.me/51966525926"><i class="fab fa-whatsapp"></i></a>
+            <div class="esencia-grid">
+                <div class="esencia-content">
+                    <div class="section-header">
+                        <span class="section-tag">Nuestra esencia</span>
+                        <h2 class="section-title">Un café con alma de barrio</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <p class="esencia-text">En Café Julieta creemos que una buena taza de café puede cambiar tu día. Somos un espacio acogedor en San Isidro y Barranco donde la tradición del café de especialidad se encuentra con la calidez de un barrio.</p>
+                    <p class="esencia-text">Nuestros granos son seleccionados cuidadosamente de fincas sostenibles, tostados artesanalmente para resaltar sus notas únicas. Acompañamos cada preparación con repostería casera hecha con amor.</p>
+                    <div class="esencia-features">
+                        <div class="feature"><i class="fas fa-seedling"></i><span>Granos de origen</span></div>
+                        <div class="feature"><i class="fas fa-mug-hot"></i><span>Tostado artesanal</span></div>
+                        <div class="feature"><i class="fas fa-heart"></i><span>Pasión por el detalle</span></div>
+                        <div class="feature"><i class="fas fa-dog"></i><span>Pet Friendly</span></div>
                     </div>
                 </div>
-                <div class="footer-links">
-                    <h4>Explora</h4>
-                    <ul>
-                        <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="#esencia">El Café</a></li>
-                        <li><a href="#" id="footerMenuLink">Menú</a></li>
-                        <li><a href="#ubicacion">Ubicación</a></li>
-                    </ul>
+                
+                <!-- Carrusel de imágenes automático -->
+                <div class="esencia-carrusel">
+                    <div class="carrusel-imagenes" id="carruselImagenes">
+                        <div class="carrusel-slide active">
+                            <img src="imagenes/cafe 01.jpg" alt="Café Julieta - Ambiente acogedor">
+                        </div>
+                        <div class="carrusel-slide">
+                            <img src="imagenes/cafe 02.jpg" alt="Café Julieta - Café de especialidad">
+                        </div>
+                        <div class="carrusel-slide">
+                            <img src="imagenes/cafe 03.jpg" alt="Café Julieta - Momentos especiales">
+                        </div>
+                    </div>
+                    <div class="carrusel-indicadores" id="carruselIndicadores">
+                        <span class="indicador active"></span>
+                        <span class="indicador"></span>
+                        <span class="indicador"></span>
+                    </div>
                 </div>
-                <div class="footer-hours">
-                    <h4>Horarios</h4>
-                    <ul>
-                        <li><span>San Isidro:</span> 8am - 9:30pm</li>
-                        <li><span>Barranco:</span> 8am - 9pm</li>
-                        <li><span>Todos los días:</span> Abierto</li>
-                    </ul>
-                </div>
-                <div class="footer-newsletter">
-                    <h4>Newsletter</h4>
-                    <p>Novedades y promociones</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Tu correo">
-                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
-                    </form>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Café Julieta - Café de Barrio en San Isidro y Barranco | 🐶 Pet Friendly | Todos los derechos reservados.</p>
             </div>
         </div>
-    </footer>
+    </section>
 
-    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+    <!-- Sección de Carta - Redirige a carta.html -->
+    <section class="carta-preview">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Descubre nuestros sabores</span>
+                <h2 class="section-title">Nuestra Carta</h2>
+                <div class="section-divider center"></div>
+            </div>
+            <p>Explora nuestro menú completo con todas nuestras especialidades, desde desayunos hasta cenas, pasando por nuestros famosos sánguches y pizzas artesanales.</p>
+            <a href="#" id="cartaPreviewBtn" class="btn">Ver Carta Digital <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
 
-    <script>
-        // Función para redirigir a la página de la carta
-        function irACarta() {
-            window.location.href = "carta.html";
+    <!-- Sección Chef con Video -->
+    <section id="chef" class="chef">
+        <div class="container">
+            <div class="chef-wrapper">
+                <div class="chef-video">
+                    <video class="chef-video-element" autoplay loop muted playsinline disablePictureInPicture>
+                        <source src="video/video 01.mp4" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                </div>
+                <div class="chef-info">
+                    <div class="section-header">
+                        <span class="section-tag">Nuestro Maestro</span>
+                        <h2 class="section-title">Carlos & el equipo</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <p class="chef-bio">Detrás de cada taza hay un equipo apasionado por el café. Carlos, nuestro barista principal, ha recorrido fincas cafetaleras de Cajamarca y Junín para seleccionar los mejores granos.</p>
+                    <p class="chef-bio">En Café Julieta, cada preparación es un homenaje a la cultura cafetera peruana. Desde el espresso hasta nuestros cold brews, cuidamos cada detalle para que vivas una experiencia única.</p>
+                    <div class="chef-quote"><i class="fas fa-quote-left"></i><p>Un buen café no solo se toma, se siente. Es el resultado del trabajo de muchas manos que aman lo que hacen.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ubicacion" class="ubicacion">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Visítanos</span>
+                <h2 class="section-title">Nuestras Sedes</h2>
+                <div class="section-divider center"></div>
+                <p class="section-subtitle">Dos ubicaciones para disfrutar de la experiencia Julieta</p>
+            </div>
+            
+            <div class="pet-friendly-wrapper">
+                <div class="pet-friendly-banner">
+                    <div class="pet-icon"><i class="fas fa-paw"></i></div>
+                    <div class="pet-text">
+                        <h4>🐶 Pet Friendly</h4>
+                        <p>¡Tu mascota es bienvenida! Contamos con espacios adaptados</p>
+                    </div>
+                    <i class="fas fa-heart" style="opacity: 0.7;"></i>
+                </div>
+            </div>
+            
+            <div class="sedes-grid">
+                <!-- Sede San Isidro -->
+                <div class="sede-card san-isidro-card">
+                    <div class="sede-header">
+                        <h3>📍 San Isidro</h3>
+                        <p>Los Libertadores 260</p>
+                    </div>
+                    <div class="sede-body">
+                        <div class="sede-info"><i class="fas fa-clock"></i><div class="info-content"><strong>Horario</strong><p>Lunes a Domingo · 8:00 am - 9:30 pm</p></div></div>
+                        <div class="sede-info"><i class="fas fa-phone-alt"></i><div class="info-content"><strong>Contacto</strong><p>+51 966 525 926</p></div></div>
+                        <div class="sede-info"><i class="fas fa-dog"></i><div class="info-content"><strong>Mascotas</strong><p>🐶 Espacio Pet Friendly</p><span class="pet-badge"><i class="fas fa-paw"></i> Bienvenidos</span></div></div>
+                        <div class="sede-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.5000!2d-77.0312!3d-12.0995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c7e0b2e5b5b5%3A0x7e2e0c0e0e0e0e0!2sLos%20Libertadores%20260%2C%20San%20Isidro!5e0!3m2!1sen!2spe!4v1713040000000!5m2!1sen!2spe" allowfullscreen="" loading="lazy"></iframe></div>
+                        <a href="https://maps.google.com/?q=Los+Libertadores+260+San+Isidro" target="_blank" class="btn-maps"><i class="fas fa-directions"></i> Cómo llegar</a>
+                    </div>
+                </div>
+                
+                <!-- Sede Barranco -->
+                <div class="sede-card barranco-card">
+                    <div class="sede-header">
+                        <h3>📍 Barranco</h3>
+                        <p>Av. Miguel Grau 799</p>
+                    </div>
+                    <div class="sede-body">
+                        <div class="sede-info"><i class="fas fa-clock"></i><div class="info-content"><strong>Horario</strong><p>Lunes a Domingo · 8:00 am - 9:00 pm</p></div></div>
+                        <div class="sede-info"><i class="fas fa-phone-alt"></i><div class="info-content"><strong>Contacto</strong><p>+51 966 525 926</p></div></div>
+                        <div class="sede-info"><i class="fas fa-dog"></i><div class="info-content"><strong>Mascotas</strong><p>🐶 Espacio Pet Friendly</p><span class="pet-badge"><i class="fas fa-paw"></i> Bienvenidos</span></div></div>
+                        <div class="sede-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.853353574924!2d-77.024059!3d-12.146737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b71c2e7d0e0f%3A0x7e2e0c0e0e0e0e0!2sAv.%20Almte.%20Miguel%20Grau%20799%2C%20Barranco%2015063!5e0!3m2!1sen!2spe!4v1713040000000!5m2!1sen!2spe" allowfullscreen="" loading="lazy"></iframe></div>
+                        <a href="https://maps.google.com/?q=Av+Miguel+Grau+799+Barranco" target="_blank" class="btn-maps"><i class="fas fa-directions"></i> Cómo llegar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reservas">
+        <div class="container">
+            <div class="reservas-content">
+                <div class="reservas-text">
+                    <h2>¿Quieres una experiencia especial?</h2>
+                    <p>🐶 Tu mascota también es bienvenida · Escríbenos para reservas o eventos privados</p>
+                </div>
+                <a href="https://wa.me/51966525926" class="btn btn-primary btn-large"><i class="fab fa-whatsapp"></i> Contáctanos por WhatsApp</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <div class="footer-logo"><span class="logo-icon">☕</span><span class="logo-text">JULIETA CAFÉ</span></div>
+                <p>Café de barrio en San Isidro y Barranco, donde cada taza cuenta una historia. 🐶 Pet Friendly</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/cafe.julieta/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/51966525926"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Explora</h4>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#esencia">El Café</a></li>
+                    <li><a href="#" id="footerMenuLink">Menú</a></li>
+                    <li><a href="#ubicacion">Ubicación</a></li>
+                </ul>
+            </div>
+            <div class="footer-hours">
+                <h4>Horarios</h4>
+                <ul>
+                    <li><span>San Isidro:</span> 8am - 9:30pm</li>
+                    <li><span>Barranco:</span> 8am - 9pm</li>
+                    <li><span>Todos los días:</span> Abierto</li>
+                </ul>
+            </div>
+            <div class="footer-newsletter">
+                <h4>Newsletter</h4>
+                <p>Novedades y promociones</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Tu correo">
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Café Julieta - Café de Barrio en San Isidro y Barranco | 🐶 Pet Friendly | Todos los derechos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+    // ========== CARRUSEL AUTOMÁTICO PARA LA SECCIÓN ESENCIA ==========
+    const slides = document.querySelectorAll('.carrusel-slide');
+    const indicadores = document.querySelectorAll('.indicador');
+    let currentSlide = 0;
+    let intervalo;
+
+    function mostrarSlide(index) {
+        // Ocultar todos los slides
+        slides.forEach(slide => {
+            slide.classList.remove('active');
+        });
+        
+        // Desactivar todos los indicadores
+        indicadores.forEach(ind => {
+            ind.classList.remove('active');
+        });
+        
+        // Mostrar el slide actual
+        slides[index].classList.add('active');
+        indicadores[index].classList.add('active');
+        currentSlide = index;
+    }
+
+    function siguienteSlide() {
+        let newIndex = currentSlide + 1;
+        if (newIndex >= slides.length) {
+            newIndex = 0;
         }
+        mostrarSlide(newIndex);
+    }
 
-        // Asignar evento a todos los botones y enlaces que llevan al menú
-        document.getElementById("heroMenuBtn")?.addEventListener("click", irACarta);
-        document.getElementById("menuLink")?.addEventListener("click", irACarta);
-        document.getElementById("cartaPreviewBtn")?.addEventListener("click", irACarta);
-        document.getElementById("footerMenuLink")?.addEventListener("click", irACarta);
+    // Iniciar carrusel automático (cada 4 segundos)
+    function iniciarCarrusel() {
+        intervalo = setInterval(siguienteSlide, 4000);
+    }
 
-        // Preloader
-        window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            if(preloader) { setTimeout(() => { preloader.classList.add('hide'); setTimeout(() => { preloader.style.display = 'none'; }, 500); }, 800); }
+    // Detener carrusel al hacer hover
+    const carruselContainer = document.querySelector('.esencia-carrusel');
+    if (carruselContainer) {
+        carruselContainer.addEventListener('mouseenter', () => {
+            clearInterval(intervalo);
         });
         
-        // Header scroll
-        const header = document.getElementById('header');
-        const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if(window.scrollY > 100) { header.classList.add('scrolled'); backToTop.classList.add('show'); }
-            else { header.classList.remove('scrolled'); backToTop.classList.remove('show'); }
+        carruselContainer.addEventListener('mouseleave', () => {
+            iniciarCarrusel();
         });
-        
-        // Mobile menu
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-        if(hamburger && navMenu) {
-            hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navMenu.classList.toggle('active'); });
-            document.querySelectorAll('.nav-link').forEach(link => { 
-                link.addEventListener('click', () => { 
-                    hamburger.classList.remove('active'); 
-                    navMenu.classList.remove('active'); 
-                }); 
-            });
-        }
-        
-        // Smooth scroll (solo para enlaces internos que no sean el menú)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                const target = document.querySelector(targetId);
-                if(target) { 
-                    e.preventDefault(); 
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
-                }
-            });
+    }
+
+    // Evento click en indicadores
+    indicadores.forEach((indicador, index) => {
+        indicador.addEventListener('click', () => {
+            clearInterval(intervalo);
+            mostrarSlide(index);
+            iniciarCarrusel();
         });
-        
-        // Back to top
-        if(backToTop) { backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); }); }
-        
-        // Newsletter
-        const newsletterForm = document.querySelector('.newsletter-form');
-        if(newsletterForm) {
-            newsletterForm.addEventListener('submit', (e) => { 
+    });
+
+    // Iniciar el carrusel automático
+    iniciarCarrusel();
+
+    // Función para redirigir a la página de la carta
+    function irACarta() {
+        window.location.href = "carta.html";
+    }
+
+    // Asignar evento a todos los botones y enlaces que llevan al menú
+    document.getElementById("heroMenuBtn")?.addEventListener("click", irACarta);
+    document.getElementById("menuLink")?.addEventListener("click", irACarta);
+    document.getElementById("cartaPreviewBtn")?.addEventListener("click", irACarta);
+    document.getElementById("footerMenuLink")?.addEventListener("click", irACarta);
+
+    // Preloader
+    window.addEventListener('load', () => {
+        const preloader = document.getElementById('preloader');
+        if(preloader) { setTimeout(() => { preloader.classList.add('hide'); setTimeout(() => { preloader.style.display = 'none'; }, 500); }, 800); }
+    });
+    
+    // Header scroll
+    const header = document.getElementById('header');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        if(window.scrollY > 100) { header.classList.add('scrolled'); backToTop.classList.add('show'); }
+        else { header.classList.remove('scrolled'); backToTop.classList.remove('show'); }
+    });
+    
+    // Mobile menu
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    if(hamburger && navMenu) {
+        hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navMenu.classList.toggle('active'); });
+        document.querySelectorAll('.nav-link').forEach(link => { 
+            link.addEventListener('click', () => { 
+                hamburger.classList.remove('active'); 
+                navMenu.classList.remove('active'); 
+            }); 
+        });
+    }
+    
+    // Smooth scroll (solo para enlaces internos que no sean el menú)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if(targetId === '#') return;
+            const target = document.querySelector(targetId);
+            if(target) { 
                 e.preventDefault(); 
-                const input = newsletterForm.querySelector('input'); 
-                if(input.value) { 
-                    alert('¡Gracias por suscribirte! Recibirás nuestras novedades.'); 
-                    input.value = ''; 
-                } 
-            });
-        }
-        
-        // Active nav on scroll
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-link');
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => { 
-                const sectionTop = section.offsetTop; 
-                const sectionHeight = section.clientHeight; 
-                if(scrollY >= (sectionTop - 200)) { 
-                    current = section.getAttribute('id'); 
-                } 
-            });
-            navLinks.forEach(link => { 
-                link.classList.remove('active'); 
-                if(link.getAttribute('href') === `#${current}`) { 
-                    link.classList.add('active'); 
-                } 
-            });
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
+            }
         });
-        
-        console.log('Café Julieta - Página principal con redirección a carta.html ✅');
-    </script>
-    </body>
-    </html>
+    });
+    
+    // Back to top
+    if(backToTop) { backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); }); }
+    
+    // Newsletter
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if(newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => { 
+            e.preventDefault(); 
+            const input = newsletterForm.querySelector('input'); 
+            if(input.value) { 
+                alert('¡Gracias por suscribirte! Recibirás nuestras novedades.'); 
+                input.value = ''; 
+            } 
+        });
+    }
+    
+    // Active nav on scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => { 
+            const sectionTop = section.offsetTop; 
+            const sectionHeight = section.clientHeight; 
+            if(scrollY >= (sectionTop - 200)) { 
+                current = section.getAttribute('id'); 
+            } 
+        });
+        navLinks.forEach(link => { 
+            link.classList.remove('active'); 
+            if(link.getAttribute('href') === `#${current}`) { 
+                link.classList.add('active'); 
+            } 
+        });
+    });
+    
+    console.log('Café Julieta - Carrusel automático de imágenes cargado ✅');
+</script>
+</body>
+</html>

@@ -413,24 +413,56 @@
             transform: scale(1.2);
         }
 
-        /* ========== SECCIÓN DE CARTA (REDIRECCIÓN) ========== */
+        /* ========== SECCIÓN DE CARTA CON FONDO DE IMAGEN ========== */
         .carta-preview {
-            background: var(--bg-warm);
+            position: relative;
+            background-image: url('imagenes/carta.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 6rem 2rem;
+            overflow: hidden;
         }
-        .carta-preview h2 {
-            font-size: 2rem;
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
+        
+        .carta-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(44, 24, 16, 0.85) 0%, rgba(0,0,0,0.6) 100%);
+            z-index: 1;
         }
+        
+        .carta-preview .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .carta-preview .section-tag {
+            color: #D4B8A8;
+        }
+        
+        .carta-preview .section-title {
+            color: var(--white);
+        }
+        
+        .carta-preview .section-divider {
+            background: var(--primary-color);
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
         .carta-preview p {
-            color: var(--text-light);
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: 2rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            font-size: 1rem;
         }
+        
         .carta-preview .btn {
             background: var(--primary-color);
             color: var(--white);
@@ -442,10 +474,13 @@
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
+            border: none;
+            cursor: pointer;
         }
+        
         .carta-preview .btn:hover {
             background: var(--primary-dark);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
         }
 
@@ -841,6 +876,10 @@
             .carrusel-slide img {
                 height: 300px;
             }
+            .carta-preview {
+                padding: 4rem 1rem;
+                background-attachment: scroll;
+            }
         }
         @media (max-width: 768px) {
             .container { padding: 0 1rem; }
@@ -848,6 +887,13 @@
             .section-title { font-size: 2rem; }
             .carrusel-slide img {
                 height: 250px;
+            }
+            .carta-preview p {
+                font-size: 0.9rem;
+            }
+            .carta-preview .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -939,8 +985,9 @@
         </div>
     </section>
 
-    <!-- Sección de Carta - Redirige a carta.html -->
+    <!-- Sección de Carta con Fondo de Imagen -->
     <section class="carta-preview">
+        <div class="carta-overlay"></div>
         <div class="container">
             <div class="section-header text-center">
                 <span class="section-tag">Descubre nuestros sabores</span>
@@ -1097,17 +1144,8 @@
     let intervalo;
 
     function mostrarSlide(index) {
-        // Ocultar todos los slides
-        slides.forEach(slide => {
-            slide.classList.remove('active');
-        });
-        
-        // Desactivar todos los indicadores
-        indicadores.forEach(ind => {
-            ind.classList.remove('active');
-        });
-        
-        // Mostrar el slide actual
+        slides.forEach(slide => slide.classList.remove('active'));
+        indicadores.forEach(ind => ind.classList.remove('active'));
         slides[index].classList.add('active');
         indicadores[index].classList.add('active');
         currentSlide = index;
@@ -1115,30 +1153,20 @@
 
     function siguienteSlide() {
         let newIndex = currentSlide + 1;
-        if (newIndex >= slides.length) {
-            newIndex = 0;
-        }
+        if (newIndex >= slides.length) newIndex = 0;
         mostrarSlide(newIndex);
     }
 
-    // Iniciar carrusel automático (cada 4 segundos)
     function iniciarCarrusel() {
         intervalo = setInterval(siguienteSlide, 4000);
     }
 
-    // Detener carrusel al hacer hover
     const carruselContainer = document.querySelector('.esencia-carrusel');
     if (carruselContainer) {
-        carruselContainer.addEventListener('mouseenter', () => {
-            clearInterval(intervalo);
-        });
-        
-        carruselContainer.addEventListener('mouseleave', () => {
-            iniciarCarrusel();
-        });
+        carruselContainer.addEventListener('mouseenter', () => clearInterval(intervalo));
+        carruselContainer.addEventListener('mouseleave', () => iniciarCarrusel());
     }
 
-    // Evento click en indicadores
     indicadores.forEach((indicador, index) => {
         indicador.addEventListener('click', () => {
             clearInterval(intervalo);
@@ -1147,7 +1175,6 @@
         });
     });
 
-    // Iniciar el carrusel automático
     iniciarCarrusel();
 
     // Función para redirigir a la página de la carta
@@ -1155,7 +1182,6 @@
         window.location.href = "carta.html";
     }
 
-    // Asignar evento a todos los botones y enlaces que llevan al menú
     document.getElementById("heroMenuBtn")?.addEventListener("click", irACarta);
     document.getElementById("menuLink")?.addEventListener("click", irACarta);
     document.getElementById("cartaPreviewBtn")?.addEventListener("click", irACarta);
@@ -1188,7 +1214,7 @@
         });
     }
     
-    // Smooth scroll (solo para enlaces internos que no sean el menú)
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
@@ -1237,7 +1263,7 @@
         });
     });
     
-    console.log('Café Julieta - Carrusel automático de imágenes cargado ✅');
+    console.log('Café Julieta - Sección carta con imagen de fondo cargada ✅');
 </script>
 </body>
 </html>

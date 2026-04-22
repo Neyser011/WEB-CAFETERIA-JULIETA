@@ -17,7 +17,7 @@
             box-sizing: border-box;
         }
 
-        /* ========== PALETA DE COLORES IGUAL A LA PÁGINA PRINCIPAL ========== */
+        /* ========== PALETA DE COLORES ========== */
         :root {
             --primary-color: #6F4E37;
             --primary-dark: #5A3A2A;
@@ -35,16 +35,13 @@
             --shadow-lg: 0 10px 30px rgba(0,0,0,0.1);
             --transition: all 0.3s ease;
             
-            /* Colores específicos para cada sede */
             --si-primary: #D4794A;
             --si-primary-dark: #B85C2E;
             --si-primary-light: #F0C4A8;
-            --si-bg: #FFF8F2;
             
             --ba-primary: #2E8B8B;
             --ba-primary-dark: #206E6E;
             --ba-primary-light: #A8D4D4;
-            --ba-bg: #F2F8F6;
         }
 
         body {
@@ -53,9 +50,10 @@
             color: var(--text-color);
             line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* Header de la carta */
+        /* Header */
         .carta-header {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             padding: 2rem 0;
@@ -102,6 +100,7 @@
             justify-content: center;
             gap: 1.5rem;
             margin: 2rem auto;
+            flex-wrap: wrap;
         }
 
         .sede-btn {
@@ -138,9 +137,9 @@
             color: white;
         }
 
-        /* Contenedor del carrusel - MEJORADO PARA VISUALIZACIÓN */
+        /* Contenedor del carrusel */
         .carrusel-container {
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 1rem 2rem 3rem;
             position: relative;
@@ -156,7 +155,7 @@
 
         .carrusel-track {
             display: flex;
-            transition: transform 0.5s ease-in-out;
+            transition: transform 0.4s ease-in-out;
         }
 
         .carrusel-slide {
@@ -166,52 +165,37 @@
             justify-content: center;
             align-items: center;
             background: var(--white);
+            cursor: pointer;
         }
 
-        /* ESTILOS MEJORADOS PARA LAS IMÁGENES */
+        /* ESTILOS MEJORADOS PARA IMÁGENES */
         .carrusel-slide img {
             width: 100%;
-            max-width: 100%;
             height: auto;
-            max-height: 85vh;
+            max-height: 70vh;
+            min-height: 400px;
             object-fit: contain;
             display: block;
             margin: 0 auto;
             background: var(--white);
-            border-radius: 1rem;
+            transition: transform 0.2s ease;
         }
 
-        /* Contenedor para imágenes más grandes con scroll si es necesario */
-        .carrusel-slide {
-            max-height: 85vh;
-            overflow-y: auto;
-            scrollbar-width: thin;
+        .carrusel-slide:hover img {
+            transform: scale(1.02);
         }
 
-        .carrusel-slide::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .carrusel-slide::-webkit-scrollbar-track {
-            background: var(--bg-cream);
-            border-radius: 10px;
-        }
-
-        .carrusel-slide::-webkit-scrollbar-thumb {
-            background: var(--primary-light);
-            border-radius: 10px;
-        }
-
-        /* Botones de navegación */
+        /* Botones de navegación - FLECHAS TRANSPARENTES */
         .carrusel-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(111, 78, 55, 0.85);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
             color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             cursor: pointer;
             transition: var(--transition);
@@ -219,12 +203,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
-            backdrop-filter: blur(4px);
+            font-size: 1.2rem;
         }
 
         .carrusel-btn:hover {
             background: var(--primary-color);
+            border-color: var(--primary-color);
             transform: translateY(-50%) scale(1.05);
         }
 
@@ -242,11 +226,12 @@
             justify-content: center;
             gap: 0.8rem;
             margin-top: 1.5rem;
+            flex-wrap: wrap;
         }
 
         .dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: #D4B8A8;
             cursor: pointer;
@@ -255,7 +240,7 @@
 
         .dot.active {
             background: var(--primary-color);
-            width: 25px;
+            width: 24px;
             border-radius: 10px;
         }
 
@@ -263,7 +248,7 @@
         .image-counter {
             text-align: center;
             margin-top: 1rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
             color: var(--text-light);
             background: var(--white);
@@ -303,6 +288,80 @@
         .sede-info.san-isidro-info h3 { color: var(--si-primary); }
         .sede-info.barranco-info h3 { color: var(--ba-primary); }
 
+        /* ========== MODAL DE ZOOM ========== */
+        .modal-zoom {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-zoom.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            text-align: center;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .modal-info {
+            position: absolute;
+            bottom: -35px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.8rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         /* Footer */
         .carta-footer {
             text-align: center;
@@ -332,35 +391,63 @@
         /* Indicador de carga */
         .loading-indicator {
             text-align: center;
-            padding: 2rem;
+            padding: 3rem;
             color: var(--text-light);
         }
 
-        /* Zoom en hover para escritorio */
-        @media (min-width: 1024px) {
-            .carrusel-slide img {
-                transition: transform 0.3s ease;
-                cursor: zoom-in;
-            }
+        .loading-indicator i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Tooltip para indicar zoom */
+        .zoom-hint {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            pointer-events: none;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .carta-header h1 { font-size: 1.6rem; }
+        @media (max-width: 968px) {
+            .carta-header h1 { font-size: 1.8rem; }
             .back-link { left: 1rem; font-size: 0.8rem; }
-            .sede-btn { padding: 0.5rem 1.2rem; font-size: 0.85rem; gap: 0.3rem; }
-            .carrusel-btn { width: 35px; height: 35px; font-size: 0.9rem; }
+            .sede-btn { padding: 0.6rem 1.2rem; font-size: 0.85rem; gap: 0.3rem; }
+            .carrusel-btn { width: 40px; height: 40px; font-size: 1rem; }
             .carrusel-btn.prev { left: 0.5rem; }
             .carrusel-btn.next { right: 0.5rem; }
             .carrusel-container { padding: 1rem; }
-            .carrusel-slide { max-height: 70vh; }
-            .image-counter { font-size: 0.75rem; }
+            .carrusel-slide img { max-height: 60vh; min-height: 300px; }
+            .zoom-hint { font-size: 0.6rem; bottom: 10px; right: 10px; }
         }
 
-        /* Para tablets */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .carrusel-container { max-width: 90%; }
-            .carrusel-slide { max-height: 75vh; }
+        @media (max-width: 768px) {
+            .carta-header h1 { font-size: 1.5rem; }
+            .sede-btn { padding: 0.5rem 1rem; font-size: 0.75rem; }
+            .carrusel-btn { width: 35px; height: 35px; font-size: 0.8rem; }
+            .carrusel-slide img { max-height: 50vh; min-height: 250px; }
+            .image-counter { font-size: 0.7rem; }
+            .sede-info h3 { font-size: 1.2rem; }
+            .zoom-hint { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .carrusel-slide img { max-height: 45vh; min-height: 200px; }
+        }
+
+        @media (min-width: 1200px) {
+            .carrusel-slide img { max-height: 75vh; min-height: 500px; }
         }
     </style>
 </head>
@@ -381,9 +468,10 @@
     <div class="carrusel-wrapper">
         <button class="carrusel-btn prev" id="prevBtn" aria-label="Anterior página"><i class="fas fa-chevron-left"></i></button>
         <div class="carrusel-track" id="carruselTrack">
-            <div class="loading-indicator">Cargando imágenes...</div>
+            <div class="loading-indicator"><i class="fas fa-spinner fa-pulse"></i><br>Cargando menú...</div>
         </div>
         <button class="carrusel-btn next" id="nextBtn" aria-label="Siguiente página"><i class="fas fa-chevron-right"></i></button>
+        <div class="zoom-hint"><i class="fas fa-search-plus"></i> Haz clic para ampliar</div>
     </div>
     <div class="carrusel-dots" id="carruselDots"></div>
     <div class="image-counter" id="imageCounter"></div>
@@ -398,6 +486,15 @@
 <footer class="carta-footer">
     <a href="https://wa.me/51966525926" target="_blank"><i class="fab fa-whatsapp"></i> ¿Dudas? Contáctanos por WhatsApp</a>
 </footer>
+
+<!-- Modal de Zoom -->
+<div id="modalZoom" class="modal-zoom">
+    <div class="modal-content">
+        <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+        <img id="modalImage" src="" alt="Ampliar">
+        <div class="modal-info" id="modalInfo"></div>
+    </div>
+</div>
 
 <script>
     // Configuración de las imágenes por sede
@@ -427,20 +524,59 @@
     const imageCounter = document.getElementById("imageCounter");
     const sedeInfo = document.getElementById("sedeInfo");
     const sedeBtns = document.querySelectorAll(".sede-btn");
+    
+    // Elementos del modal
+    const modalZoom = document.getElementById("modalZoom");
+    const modalImage = document.getElementById("modalImage");
+    const modalInfo = document.getElementById("modalInfo");
+    const modalClose = document.getElementById("modalClose");
 
-    // Función para cargar las imágenes de la sede seleccionada
+    // Variable para almacenar la imagen actual en el modal
+    let currentImageUrl = "";
+    let currentImageName = "";
+
+    // Función para abrir el modal con zoom
+    function abrirZoom(imgSrc, pageNumber) {
+        modalImage.src = imgSrc;
+        modalInfo.textContent = `${currentSede} - Página ${pageNumber} - Haz clic fuera para cerrar`;
+        modalZoom.classList.add("active");
+        document.body.style.overflow = "hidden";
+    }
+
+    // Función para cerrar el modal
+    function cerrarZoom() {
+        modalZoom.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+    // Eventos del modal
+    modalZoom.addEventListener("click", (e) => {
+        if (e.target === modalZoom) {
+            cerrarZoom();
+        }
+    });
+    modalClose.addEventListener("click", cerrarZoom);
+
+    // Cerrar con tecla ESC
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modalZoom.classList.contains("active")) {
+            cerrarZoom();
+        }
+    });
+
+    // Función para cargar las imágenes del carrusel
     function cargarCarrusel(sede) {
         const imagenes = imagenesPorSede[sede];
         totalImages = imagenes.length;
         currentIndex = 0;
 
         // Mostrar indicador de carga
-        carruselTrack.innerHTML = '<div class="loading-indicator"><i class="fas fa-spinner fa-pulse"></i> Cargando menú...</div>';
+        carruselTrack.innerHTML = '<div class="loading-indicator"><i class="fas fa-spinner fa-pulse"></i><br>Cargando menú...</div>';
         
         // Limpiar dots
         dotsContainer.innerHTML = "";
 
-        // Crear los slides con manejo de errores de carga
+        // Crear los slides
         const slides = [];
         
         imagenes.forEach((imgSrc, index) => {
@@ -449,17 +585,22 @@
             const img = document.createElement("img");
             img.alt = `${sede} - Página ${index + 1}`;
             
-            // Manejo de carga y errores
+            // Agregar evento de click para abrir zoom
+            img.addEventListener("click", (e) => {
+                e.stopPropagation();
+                abrirZoom(imgSrc, index + 1);
+            });
+            
+            // Manejo de carga
             img.onload = () => {
-                // Verificar si todas las imágenes han cargado
                 const loadedImgs = document.querySelectorAll('.carrusel-slide img').length;
                 if (loadedImgs === totalImages) {
-                    // Todas las imágenes cargadas correctamente
+                    // Todas las imágenes cargadas
                 }
             };
             
             img.onerror = () => {
-                img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23f0f0f0"/><text x="200" y="150" font-family="Arial" font-size="14" fill="%23999" text-anchor="middle">Imagen no disponible</text><text x="200" y="170" font-family="Arial" font-size="12" fill="%23999" text-anchor="middle">${imgSrc.split('/').pop()}</text></svg>';
+                img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"%3E%3Crect width="400" height="300" fill="%23f5f5f5"/%3E%3Ctext x="200" y="150" font-family="Arial" font-size="14" fill="%23999" text-anchor="middle"%3EImagen no disponible%3C/text%3E%3Ctext x="200" y="170" font-family="Arial" font-size="12" fill="%23999" text-anchor="middle"%3E' + imgSrc.split('/').pop() + '%3C/text%3E%3C/svg%3E';
                 img.style.objectFit = "contain";
             };
             
@@ -491,7 +632,6 @@
         const offset = -currentIndex * 100;
         carruselTrack.style.transform = `translateX(${offset}%)`;
         
-        // Actualizar dots activos
         const dots = document.querySelectorAll(".dot");
         dots.forEach((dot, index) => {
             if (index === currentIndex) {
@@ -502,7 +642,7 @@
         });
     }
 
-    // Crear/actualizar los dots (indicadores)
+    // Crear/actualizar los dots
     function actualizarDots() {
         dotsContainer.innerHTML = "";
         for (let i = 0; i < totalImages; i++) {
@@ -518,12 +658,12 @@
         }
     }
 
-    // Actualizar el contador de imágenes
+    // Actualizar contador
     function actualizarContador() {
         imageCounter.textContent = `📄 Página ${currentIndex + 1} de ${totalImages}`;
     }
 
-    // Actualizar la información de la sede
+    // Actualizar información de la sede
     function actualizarInfoSede(sede) {
         if (sede === "Barranco") {
             sedeInfo.className = "sede-info barranco-info";
@@ -531,7 +671,7 @@
                 <h3>📍 Barranco</h3>
                 <p>Av. Miguel Grau 799 - ${totalImages} páginas de nuestro menú</p>
                 <p style="font-size: 0.8rem; margin-top: 0.3rem;">🍕 Pizzas · 🍝 Pastas · 🥗 Ensaladas · 🍢 Piqueos</p>
-                <p style="font-size: 0.7rem; margin-top: 0.5rem; opacity: 0.7;"><i class="fas fa-arrows-alt"></i> Puedes hacer zoom en la imagen</p>
+                <p style="font-size: 0.7rem; margin-top: 0.5rem; opacity: 0.7;"><i class="fas fa-search-plus"></i> Haz clic en la imagen para ampliar</p>
             `;
         } else {
             sedeInfo.className = "sede-info san-isidro-info";
@@ -539,7 +679,7 @@
                 <h3>📍 San Isidro</h3>
                 <p>Los Libertadores 260 - ${totalImages} páginas de nuestro menú</p>
                 <p style="font-size: 0.8rem; margin-top: 0.3rem;">🌅 Desayunos · 🥪 Sánguches · 🍕 Pizzas · 🍰 Postres</p>
-                <p style="font-size: 0.7rem; margin-top: 0.5rem; opacity: 0.7;"><i class="fas fa-arrows-alt"></i> Puedes hacer zoom en la imagen</p>
+                <p style="font-size: 0.7rem; margin-top: 0.5rem; opacity: 0.7;"><i class="fas fa-search-plus"></i> Haz clic en la imagen para ampliar</p>
             `;
         }
     }
@@ -580,12 +720,14 @@
         });
     });
 
-    // Navegación con teclado (flechas izquierda/derecha)
+    // Navegación con teclado
     document.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowLeft") {
-            prevImage();
-        } else if (e.key === "ArrowRight") {
-            nextImage();
+        if (!modalZoom.classList.contains("active")) {
+            if (e.key === "ArrowLeft") {
+                prevImage();
+            } else if (e.key === "ArrowRight") {
+                nextImage();
+            }
         }
     });
 
@@ -595,23 +737,25 @@
     
     const carruselWrapper = document.querySelector('.carrusel-wrapper');
     
-    carruselWrapper.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-    });
-    
-    carruselWrapper.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        if (touchStartX - touchEndX > 50) {
-            nextImage();
-        } else if (touchEndX - touchStartX > 50) {
-            prevImage();
-        }
-    });
+    if (carruselWrapper) {
+        carruselWrapper.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        carruselWrapper.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) {
+                nextImage();
+            } else if (touchEndX - touchStartX > 50) {
+                prevImage();
+            }
+        });
+    }
 
     // Cargar carrusel inicial
     cargarCarrusel("Barranco");
 
-    console.log("Carta digital de Café Julieta - Carrusel optimizado cargado ✅");
+    console.log("Carta digital de Café Julieta - Carrusel con zoom cargado ✅");
 </script>
 </body>
 </html>

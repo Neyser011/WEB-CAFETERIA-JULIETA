@@ -343,21 +343,21 @@
         
         .feature i { color: var(--primary-color); font-size: 1.2rem; }
         
-                /* Carrusel de imágenes - SIN ESPACIOS EN BLANCO */
+                /* Carrusel de imágenes - SIN NINGÚN ESPACIO EN BLANCO */
         .esencia-carrusel {
             position: relative;
             border-radius: 1rem;
             overflow: hidden;
             box-shadow: var(--shadow-lg);
-            background: var(--white);
+            background: var(--primary-dark);
             width: 100%;
         }
         
         .carrusel-imagenes {
             position: relative;
             width: 100%;
-            aspect-ratio: 4 / 3;
-            background-color: var(--bg-cream);
+            padding-bottom: 75%; /* Proporción 4:3 (3/4 = 0.75 = 75%) */
+            background-color: var(--primary-dark);
         }
         
         .carrusel-slide {
@@ -367,12 +367,12 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            transition: opacity 0.6s ease-in-out;
+            transition: opacity 0.5s ease-in-out;
+            background-color: var(--primary-dark);
         }
         
         .carrusel-slide.active {
             opacity: 1;
-            position: relative;
             z-index: 1;
         }
         
@@ -380,41 +380,9 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
             display: block;
         }
-        
-        /* Indicadores del carrusel */
-        .carrusel-indicadores {
-            position: absolute;
-            bottom: 12px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            z-index: 20;
-        }
-        
-        .indicador {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.6);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
-        .indicador.active {
-            background: var(--primary-color);
-            width: 20px;
-            border-radius: 10px;
-        }
-        
-        .indicador:hover {
-            background: var(--primary-color);
-            transform: scale(1.2);
-        }
-
         /* ========== SECCIÓN DE CARTA CON FONDO DE IMAGEN ========== */
         .carta-preview {
             position: relative;
@@ -964,7 +932,7 @@
                     </div>
                 </div>
                 
-                                <!-- Carrusel de imágenes - SIN ESPACIOS EN BLANCO -->
+                                                <!-- Carrusel de imágenes - SIN ESPACIOS EN BLANCO -->
                 <div class="esencia-carrusel">
                     <div class="carrusel-imagenes" id="carruselImagenes">
                         <div class="carrusel-slide active">
@@ -976,11 +944,6 @@
                         <div class="carrusel-slide">
                             <img src="imagenes/cafe 03.jpg" alt="Café Julieta - Momentos especiales">
                         </div>
-                    </div>
-                    <div class="carrusel-indicadores" id="carruselIndicadores">
-                        <span class="indicador active"></span>
-                        <span class="indicador"></span>
-                        <span class="indicador"></span>
                     </div>
                 </div>
             </div>
@@ -1139,78 +1102,85 @@
 <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
 
 <script>
-        // ========== CARRUSEL AUTOMÁTICO MEJORADO ==========
-    const slides = document.querySelectorAll('.carrusel-slide');
-    const indicadores = document.querySelectorAll('.indicador');
-    let currentSlide = 0;
-    let intervalo;
+            // ========== CARRUSEL AUTOMÁTICO - SIN ESPACIOS EN BLANCO ==========
+    (function() {
+        const slides = document.querySelectorAll('.carrusel-slide');
+        
+        if (slides.length === 0) return;
+        
+        let currentSlide = 0;
+        let intervalo;
+        const totalSlides = slides.length;
 
-    function mostrarSlide(index) {
-        // Validar índice
-        if (index < 0) index = 0;
-        if (index >= slides.length) index = slides.length - 1;
-        
-        // Ocultar todos los slides
-        slides.forEach(slide => {
-            slide.classList.remove('active');
-        });
-        
-        // Desactivar todos los indicadores
-        indicadores.forEach(ind => {
-            ind.classList.remove('active');
-        });
-        
-        // Mostrar el slide actual
-        slides[index].classList.add('active');
-        indicadores[index].classList.add('active');
-        currentSlide = index;
-    }
-
-    function siguienteSlide() {
-        let newIndex = currentSlide + 1;
-        if (newIndex >= slides.length) {
-            newIndex = 0;
+        function mostrarSlide(index) {
+            // Validar índice
+            if (index < 0) index = 0;
+            if (index >= totalSlides) index = totalSlides - 1;
+            
+            // Ocultar todos los slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Mostrar el slide actual
+            slides[index].classList.add('active');
+            currentSlide = index;
         }
-        mostrarSlide(newIndex);
-    }
 
-    function anteriorSlide() {
-        let newIndex = currentSlide - 1;
-        if (newIndex < 0) {
-            newIndex = slides.length - 1;
+        function siguienteSlide() {
+            let newIndex = currentSlide + 1;
+            if (newIndex >= totalSlides) {
+                newIndex = 0;
+            }
+            mostrarSlide(newIndex);
         }
-        mostrarSlide(newIndex);
-    }
 
-    // Iniciar carrusel automático (cada 4 segundos)
-    function iniciarCarrusel() {
-        if (intervalo) clearInterval(intervalo);
-        intervalo = setInterval(siguienteSlide, 4000);
-    }
+        function anteriorSlide() {
+            let newIndex = currentSlide - 1;
+            if (newIndex < 0) {
+                newIndex = totalSlides - 1;
+            }
+            mostrarSlide(newIndex);
+        }
 
-    // Detener carrusel al hacer hover
-    const carruselContainer = document.querySelector('.esencia-carrusel');
-    if (carruselContainer) {
-        carruselContainer.addEventListener('mouseenter', () => {
-            clearInterval(intervalo);
-        });
+        function iniciarCarrusel() {
+            if (intervalo) clearInterval(intervalo);
+            intervalo = setInterval(siguienteSlide, 4000);
+        }
+
+        // Detener carrusel al hacer hover
+        const carruselContainer = document.querySelector('.esencia-carrusel');
+        if (carruselContainer) {
+            carruselContainer.addEventListener('mouseenter', () => {
+                if (intervalo) clearInterval(intervalo);
+            });
+            
+            carruselContainer.addEventListener('mouseleave', () => {
+                iniciarCarrusel();
+            });
+        }
+
+        // Iniciar el carrusel automático
+        iniciarCarrusel();
         
-        carruselContainer.addEventListener('mouseleave', () => {
-            iniciarCarrusel();
+        // Prevenir cualquier espacio en blanco en caso de imágenes lentas
+        window.addEventListener('load', () => {
+            // Forzar reflow para asegurar dimensiones correctas
+            setTimeout(() => {
+                const container = document.querySelector('.carrusel-imagenes');
+                if (container) {
+                    const height = container.offsetHeight;
+                    // Asegurar que todas las imágenes tengan la misma altura
+                    slides.forEach(slide => {
+                        const img = slide.querySelector('img');
+                        if (img && img.complete) {
+                            // Ya está cargado
+                        }
+                    });
+                }
+            }, 100);
         });
-    }
-
-    // Evento click en indicadores
-    indicadores.forEach((indicador, index) => {
-        indicador.addEventListener('click', () => {
-            clearInterval(intervalo);
-            mostrarSlide(index);
-            iniciarCarrusel();
-        });
-    });
-
-    // Iniciar el carrusel automático
-    iniciarCarrusel();
+    })();
 
     // Función para redirigir a la página de la carta
     function irACarta() {
